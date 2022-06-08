@@ -2,10 +2,12 @@ import React from "react";
 import { Helmet } from "react-helmet-async";
 
 const Title = ({ title }) => {
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
   return (
     <Helmet>
-      <title>WhatsUp - {title}</title>
-      <link rel="canonical" href="https://www.tacobell.com/" />
+      <title>WhatsUp - {capitalizeFirstLetter(title)}</title>
     </Helmet>
   );
 };

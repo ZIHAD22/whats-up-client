@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import Avatar from "../../Components/Avatar";
 import Title from "../../Components/Title";
-import Logo from "../../img/logo.png";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm();
   const handleSignIn = (data) => console.log(data);
@@ -20,11 +20,7 @@ const SignIn = () => {
         className="flex flex-col justify-center items-center h-screen mx-4"
         onSubmit={handleSubmit(handleSignIn)}
       >
-        <div className="avatar">
-          <div className="w-24 rounded">
-            <img src={Logo} alt="logo" />
-          </div>
-        </div>
+        <Avatar />
 
         <h1 className="text-center text-3xl font-serif font-bold my-5">
           Sing In
@@ -61,9 +57,17 @@ const SignIn = () => {
               </p>
             )}
           </div>
+          <div className="my-2">
+            <Link to="resetPass" class="link link-primary">
+              Forget Password
+            </Link>
+          </div>
           <button className="btn btn-primary w-full md:w-full text-white">
             Sign In
           </button>
+          <div className="text-lg text-primary text-center my-5 font-bold hover:underline">
+            <Link to="signUp">Create Account</Link>
+          </div>
         </div>
       </form>
     </div>
