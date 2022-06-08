@@ -1,9 +1,19 @@
 import axios from 'axios'
 
+let setBaseUrl
+
+if (process.env.NODE_ENV === 'development') {
+  setBaseUrl = process.env.LOCAL_SERVER_URL
+} else {
+  setBaseUrl = process.env.HOSTED_SERVER_URL
+}
+console.log(setBaseUrl)
+
 // Add a request interceptor
 axios.interceptors.request.use(
   function (config) {
     // Do something before request is sent
+    config.baseURL = setBaseUrl
     return config
   },
   function (error) {
