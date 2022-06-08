@@ -1,12 +1,11 @@
 import React from "react";
-import Helmet from "react-helmet";
+import { Helmet } from "react-helmet-async";
 
 const Title = ({ title }) => {
   return (
     <Helmet>
-      <meta charSet="utf-8" />
       <title>WhatsUp - {title}</title>
-      <link rel="canonical" href="http://mysite.com/example" />
+      <link rel="canonical" href="https://www.tacobell.com/" />
     </Helmet>
   );
 };
