@@ -1,6 +1,7 @@
 import React from "react";
 import Messages from "./Messages";
 import Title from "../../Components/Title";
+import { Outlet } from "react-router-dom";
 
 const Chat = () => {
   return (
@@ -13,7 +14,7 @@ const Chat = () => {
         </div>
         <div className="col-span-2">
           {/* div for selected message see  */}
-          <h1>this is result options</h1>
+          <Outlet />
         </div>
         <div>
           {/* div for profile */}
