@@ -5,6 +5,7 @@ import ChattingArea from '../Pages/Chat/ChattingArea'
 import SignIn from '../Pages/SignIn/SignIn'
 import SignUp from '../Pages/SignUp/SignUp'
 import './App.css'
+import 'tw-elements'
 
 // TODO: in verson 2 work with profile view before login
 

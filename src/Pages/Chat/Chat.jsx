@@ -2,6 +2,7 @@ import React from "react";
 import Messages from "./Messages";
 import Title from "../../Components/Title";
 import { Outlet } from "react-router-dom";
+import FriendProfile from "./FriendProfile";
 
 const Chat = () => {
   return (
@@ -18,7 +19,7 @@ const Chat = () => {
         </div>
         <div>
           {/* div for profile */}
-          <h1>this is profile options</h1>
+          <FriendProfile />
         </div>
       </div>
     </div>
