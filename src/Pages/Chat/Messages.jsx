@@ -8,7 +8,10 @@ const Messages = () => {
     <div className="h-screen p-5">
       <div className="shadow-md p-3 rounded-md">
         <div className={`flex items-center justify-start`}>
-          <Avatar width="w-[50px]" />
+          <div class="indicator">
+            <span class="indicator-item badge badge-primary">99+</span>
+            <Avatar width="w-[50px]" />
+          </div>
           <span className="text-3xl uppercase">messages</span>
         </div>
         <div className={`${flexCss} my-4`}>
