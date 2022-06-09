@@ -1,18 +1,19 @@
 import { Route, Routes } from 'react-router-dom'
 import NotFound from '../Components/NotFound'
+import Chat from '../Pages/Chat/Chat'
 import SignIn from '../Pages/SignIn/SignIn'
-import ProfilePicUpload from '../Pages/SignUp/ProfilePicUpload'
 import SignUp from '../Pages/SignUp/SignUp'
 import './App.css'
 
-console.log()
+// TODO: in verson 2 work with profile view before login
 
 function App() {
   return (
-    <div className="App">
+    <div className="">
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
+        <Route path="/chat" element={<Chat />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>

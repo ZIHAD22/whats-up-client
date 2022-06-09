@@ -1,0 +1,26 @@
+/* Hide scrollbar for Chrome, Safari and Opera */
+.no-scrollbarChrome::-webkit-scrollbar {
+    width: 5px;
+}
+.no-scrollbarChrome::-webkit-scrollbar-thumb {
+    background-color: #30AF91;
+    border-radius: 10px;
+}
+.no-scrollbarChrome::-webkit-scrollbar-thumb:hover {
+    background-color: #30af9180;
+}
+.no-scrollbarChrome::-webkit-scrollbar-track {
+    background-color: rgba(85, 85, 85, 0.838);
+    border-radius: 10px;
+    
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.no-scrollbarFirefox{
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.messageAreaHeight{
+    height: calc(100vh - 180px);
+}

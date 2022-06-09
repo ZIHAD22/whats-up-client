@@ -14,7 +14,7 @@ const SignIn = () => {
   } = useForm();
   const handleSignUp = (data) => {
     console.log(data);
-    navigate("profilePic", { replace: true });
+    navigate("/chat", { replace: true });
   };
 
   return (
