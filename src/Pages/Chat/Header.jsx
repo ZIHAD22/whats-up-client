@@ -10,7 +10,7 @@ const Header = () => {
           <span class="indicator-item badge badge-primary">99+</span>
           <Avatar width="w-[50px]" />
         </div>
-        <span className="text-3xl uppercase">messages</span>
+        <span className="text-3xl">Whats-Up</span>
       </div>
       <div className={`${flexCss} my-4`}>
         <input

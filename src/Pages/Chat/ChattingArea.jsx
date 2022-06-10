@@ -5,9 +5,11 @@ import AllMessages from "./AllMessages";
 
 const ChattingArea = () => {
   return (
-    <div>
+    <div className="">
       <ChatNavBar />
-      <AllMessages />
+      <div>
+        <AllMessages />
+      </div>
       <ChatInput />
     </div>
   );

@@ -11,7 +11,7 @@ import 'tw-elements'
 
 function App() {
   return (
-    <div className="">
+    <div className="max-w-[1300px] mx-auto">
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
