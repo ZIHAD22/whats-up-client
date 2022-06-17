@@ -5,8 +5,8 @@ const ChatInput = () => {
   return (
     <div className="grid grid-cols-6 mt-5">
       <div className="flex justify-center items-center">
-        <div class="dropdown">
-          <label tabindex="0" class="btn btn-ghost btn-circle">
+        <div className="dropdown">
+          <label tabindex="0" className="btn btn-ghost btn-circle">
             <svg
               className="h-12 w-16 text-primary"
               viewBox="0 0 20 20"
@@ -21,7 +21,7 @@ const ChatInput = () => {
           </label>
           {/* <ul
               tabindex="0"
-              class="menu menu-compact dropdown-content top-[-140px] mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact dropdown-content top-[-140px] mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
                 <a>Homepage</a>
@@ -39,7 +39,7 @@ const ChatInput = () => {
         <input
           type="text"
           placeholder="Type here"
-          class="input input-bordered input-primary w-full"
+          className="input input-bordered input-primary w-full"
         />
       </div>
       <button className="flex justify-center items-center">

@@ -3,11 +3,11 @@ import React from "react";
 const ProfileOptions = () => {
   return (
     <div>
-      <div class="accordion" id="accordionExample">
-        <div class="accordion-item bg-white border border-gray-200">
-          <h2 class="accordion-header mb-0" id="headingTwo">
+      <div className="accordion" id="accordionExample">
+        <div className="accordion-item bg-white border border-gray-200">
+          <h2 className="accordion-header mb-0" id="headingTwo">
             <button
-              class="
+              className="
         accordion-button
         collapsed
         relative
@@ -34,11 +34,11 @@ const ProfileOptions = () => {
           </h2>
           <div
             id="collapseTwo"
-            class="accordion-collapse collapse"
+            className="accordion-collapse collapse"
             aria-labelledby="headingTwo"
             data-bs-parent="#accordionExample"
           >
-            <div class="accordion-body py-4 px-5">
+            <div className="accordion-body py-4 px-5">
               <strong>This is the second item's accordion body.</strong> It is
               hidden by default, until the collapse plugin adds the appropriate
               classes that we use to style each element. These classes control
@@ -50,10 +50,10 @@ const ProfileOptions = () => {
             </div>
           </div>
         </div>
-        <div class="accordion-item bg-white border border-gray-200">
-          <h2 class="accordion-header mb-0" id="headingThree">
+        <div className="accordion-item bg-white border border-gray-200">
+          <h2 className="accordion-header mb-0" id="headingThree">
             <button
-              class="
+              className="
         accordion-button
         collapsed
         relative
@@ -80,11 +80,11 @@ const ProfileOptions = () => {
           </h2>
           <div
             id="collapseThree"
-            class="accordion-collapse collapse"
+            className="accordion-collapse collapse"
             aria-labelledby="headingThree"
             data-bs-parent="#accordionExample"
           >
-            <div class="accordion-body py-4 px-5">
+            <div className="accordion-body py-4 px-5">
               <strong>This is the third item's accordion body.</strong> It is
               hidden by default, until the collapse plugin adds the appropriate
               classes that we use to style each element. These classes control

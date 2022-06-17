@@ -1,20 +1,51 @@
+import axios from "../../util/axios.js";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import Avatar from "../../Components/Avatar";
 import Title from "../../Components/Title";
+import { toast } from "react-toastify";
+import useImgUpload from "../../hooks/useImgUpload.js";
 
 const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [imgUpload, ImgUploadLoading, setUploadLoading] = useImgUpload();
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const handleSignUp = (data) => {
-    console.log(data);
-    navigate("/chat", { replace: true });
+  const handleSignUp = async (data) => {
+    const {
+      name,
+      email,
+      password,
+      confirmPassword,
+      profileImg: notSavedImg,
+    } = data;
+
+    // if (password !== confirmPassword) {
+    //   return toast.warning("Password and confirm password not matched");
+    // }
+    let uploadedProfileUrl;
+    const profImg = notSavedImg[0];
+    if (profImg) {
+      setUploadLoading(true);
+      uploadedProfileUrl = await imgUpload(profImg);
+    }
+
+    const { data: newUser } = await axios.post("signUp", {
+      name,
+      email,
+      password,
+      profilePic: uploadedProfileUrl,
+    });
+
+    if (newUser._id) {
+      toast.success("User Successfully Created");
+      navigate("/chat", { replace: true });
+    }
   };
 
   return (
@@ -36,12 +67,10 @@ const SignIn = () => {
               type="text"
               placeholder="Name"
               className="input input-bordered w-full"
-              {...register("userName", { required: "required" })}
+              {...register("name", { required: "required" })}
             />
             {errors && (
-              <p className="text-red-600 text-left">
-                {errors.userName?.message}
-              </p>
+              <p className="text-red-600 text-left">{errors.name?.message}</p>
             )}
           </div>
           <div className="w-full text-center my-2">
@@ -49,12 +78,10 @@ const SignIn = () => {
               type="email"
               placeholder="Email"
               className="input input-bordered w-full"
-              {...register("userEmail", { required: "required" })}
+              {...register("email", { required: "required" })}
             />
             {errors && (
-              <p className="text-red-600 text-left">
-                {errors.userEmail?.message}
-              </p>
+              <p className="text-red-600 text-left">{errors.email?.message}</p>
             )}
           </div>
           <div className="w-full text-center my-2">
@@ -62,7 +89,7 @@ const SignIn = () => {
               type={showPassword ? "text" : "password"}
               placeholder="Password"
               className="input input-bordered w-full pr-[46px]"
-              {...register("userPassword", { required: "required" })}
+              {...register("password", { required: "required" })}
             />
             <input
               type="checkbox"
@@ -72,7 +99,7 @@ const SignIn = () => {
             />
             {errors && (
               <p className="text-red-600 text-left">
-                {errors.userPassword?.message}
+                {errors.password?.message}
               </p>
             )}
           </div>
@@ -99,15 +126,14 @@ const SignIn = () => {
             <input
               type="file"
               className="input input-bordered w-full"
-              {...register("profileImg", { required: "required" })}
+              {...register("profileImg")}
             />
-            {errors && (
-              <p className="text-red-600 text-left">
-                {errors.profileImg?.message}
-              </p>
-            )}
           </div>
-          <button className="btn btn-primary w-full md:w-full text-white">
+          <button
+            className={` ${
+              ImgUploadLoading && "loading"
+            } btn btn-primary w-full md:w-full text-white`}
+          >
             Next
           </button>
         </div>

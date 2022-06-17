@@ -6,7 +6,8 @@ import SignIn from '../Pages/SignIn/SignIn'
 import SignUp from '../Pages/SignUp/SignUp'
 import './App.css'
 import 'tw-elements'
-
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 // TODO: in verson 2 work with profile view before login
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <ToastContainer />
     </div>
   )
 }

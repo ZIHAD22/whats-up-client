@@ -58,7 +58,7 @@ const SignIn = () => {
             )}
           </div>
           <div className="my-2">
-            <Link to="resetPass" class="link link-primary">
+            <Link to="resetPass" className="link link-primary">
               Forget Password
             </Link>
           </div>

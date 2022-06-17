@@ -6,8 +6,8 @@ const Header = () => {
   return (
     <div>
       <div className={`flex items-center justify-start`}>
-        <div class="indicator">
-          <span class="indicator-item badge badge-primary">99+</span>
+        <div className="indicator">
+          <span className="indicator-item badge badge-primary">99+</span>
           <Avatar width="w-[50px]" />
         </div>
         <span className="text-3xl">Whats-Up</span>
@@ -16,7 +16,7 @@ const Header = () => {
         <input
           type="text"
           placeholder="Search People and chats"
-          class="input input-bordered input-primary w-full max-w-xs"
+          className="input input-bordered input-primary w-full max-w-xs"
         />
       </div>
     </div>

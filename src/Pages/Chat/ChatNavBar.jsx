@@ -3,21 +3,21 @@ import ActiveFriend from "./ActiveFriend";
 
 const ChatNavBar = () => {
   return (
-    <div class="navbar bg-base-100 shadow-md ">
-      <div class="flex-1">
+    <div className="navbar bg-base-100 shadow-md ">
+      <div className="flex-1">
         <ActiveFriend />
         <div className="ml-2">
-          <h1 class="normal-case text-xl">MD. ZIHAD</h1>
-          <small class="">Active Now</small>
+          <h1 className="normal-case text-xl">MD. ZIHAD</h1>
+          <small className="">Active Now</small>
         </div>
       </div>
-      <div class="dropdown">
-        <label tabindex="0" class="btn btn-ghost btn-circle">
+      <div className="dropdown">
+        <label tabindex="0" className="btn btn-ghost btn-circle">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
-            class="inline-block w-5 h-5 stroke-current"
+            className="inline-block w-5 h-5 stroke-current"
           >
             <path
               stroke-linecap="round"
@@ -29,7 +29,7 @@ const ChatNavBar = () => {
         </label>
         {/* <ul
           tabindex="0"
-          class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+          className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
         >
           <li>
             <a>Homepage</a>

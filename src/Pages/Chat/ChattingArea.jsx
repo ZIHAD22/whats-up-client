@@ -7,9 +7,7 @@ const ChattingArea = () => {
   return (
     <div className="">
       <ChatNavBar />
-      <div>
-        <AllMessages />
-      </div>
+      <AllMessages />
       <ChatInput />
     </div>
   );
