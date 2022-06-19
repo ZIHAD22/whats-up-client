@@ -1,4 +1,3 @@
-import axios from 'axios'
 import { useState } from 'react'
 
 const useImgUpload = () => {
@@ -8,10 +7,14 @@ const useImgUpload = () => {
     const formData = new FormData()
     formData.append('image', imageFile)
 
-    const { data: uploadedImg } = await axios.post(
-      process.env.REACT_APP_IMAGEBB_UPLOAD_URL,
-      formData,
-    )
+    const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMAGEBB_API_KEY}`
+    const response = await fetch(url, {
+      method: 'POST',
+      body: formData,
+    })
+
+    const uploadedImg = await response.json()
+
     const uploadedImgUrl = uploadedImg.data.url
 
     if (uploadedImgUrl) {

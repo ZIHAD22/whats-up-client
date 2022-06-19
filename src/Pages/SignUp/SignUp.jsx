@@ -17,6 +17,7 @@ const SignIn = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
   const handleSignUp = async (data) => {
@@ -33,6 +34,7 @@ const SignIn = () => {
     }
     let uploadedProfileUrl;
     const profImg = notSavedImg[0];
+
     if (profImg) {
       setUploadLoading(true);
       uploadedProfileUrl = await imgUpload(profImg);
@@ -48,7 +50,8 @@ const SignIn = () => {
     if (newUser.result._id) {
       setAccessToken(newUser.userToken);
       toast.success("User Successfully Created");
-      navigate("/chat", { replace: true });
+      reset();
+      navigate("/", { replace: true });
     }
   };
 

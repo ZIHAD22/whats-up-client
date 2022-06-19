@@ -7,8 +7,6 @@ const RequireAuth = ({ children }) => {
   const [user, loading] = useAuthUser();
   let location = useLocation();
 
-  console.log(user);
-
   if (loading) {
     return <Spinner />;
   }

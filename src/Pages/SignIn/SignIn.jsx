@@ -1,3 +1,4 @@
+import axios from "../../util/axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -11,7 +12,11 @@ const SignIn = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const handleSignIn = (data) => console.log(data);
+  const handleSignIn = async (data) => {
+    const signInUser = await axios.post("/signIn", data);
+
+    console.log(signInUser);
+  };
 
   return (
     <div className="lg:w-1/2 w-full mx-auto">

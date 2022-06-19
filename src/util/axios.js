@@ -13,9 +13,7 @@ axios.interceptors.request.use(
   function (config) {
     // Do something before request is sent
     config.baseURL = setBaseUrl
-    config.headers.authorization = `Bearer ${localStorage.getItem(
-      'accessToken',
-    )} `
+    config.headers.authorization = `${localStorage.getItem('accessToken')} `
     // console.log(config)
     return config
   },
