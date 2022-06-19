@@ -7,7 +7,6 @@ import Title from "../../Components/Title";
 import { toast } from "react-toastify";
 import useImgUpload from "../../hooks/useImgUpload.js";
 import useSetAccessToken from "../../hooks/useSetAccessToken.js";
-import Spinner from "../../Components/Spinner.jsx";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -49,7 +48,7 @@ const SignIn = () => {
     if (newUser.result._id) {
       setAccessToken(newUser.userToken);
       toast.success("User Successfully Created");
-      // navigate("/chat", { replace: true });
+      navigate("/chat", { replace: true });
     }
   };
 
