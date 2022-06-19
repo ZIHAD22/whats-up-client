@@ -8,6 +8,7 @@ import './App.css'
 import 'tw-elements'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import RequireAuth from '../Components/RequireAuth'
 // TODO: in verson 2 work with profile view before login
 
 function App() {
@@ -16,7 +17,14 @@ function App() {
       <Routes>
         <Route path="/" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
-        <Route path="/chat" element={<Chat />}>
+        <Route
+          path="/chat"
+          element={
+            <RequireAuth>
+              <Chat />
+            </RequireAuth>
+          }
+        >
           <Route path="chatResult" element={<ChattingArea />} />
         </Route>
         <Route path="*" element={<NotFound />} />

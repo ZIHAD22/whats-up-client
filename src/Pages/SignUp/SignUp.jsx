@@ -6,11 +6,15 @@ import Avatar from "../../Components/Avatar";
 import Title from "../../Components/Title";
 import { toast } from "react-toastify";
 import useImgUpload from "../../hooks/useImgUpload.js";
+import useSetAccessToken from "../../hooks/useSetAccessToken.js";
+import Spinner from "../../Components/Spinner.jsx";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [imgUpload, ImgUploadLoading, setUploadLoading] = useImgUpload();
-  const navigate = useNavigate();
+  const [setAccessToken] = useSetAccessToken();
+
   const {
     register,
     handleSubmit,
@@ -25,9 +29,9 @@ const SignIn = () => {
       profileImg: notSavedImg,
     } = data;
 
-    // if (password !== confirmPassword) {
-    //   return toast.warning("Password and confirm password not matched");
-    // }
+    if (password !== confirmPassword) {
+      return toast.warning("Password and confirm password not matched");
+    }
     let uploadedProfileUrl;
     const profImg = notSavedImg[0];
     if (profImg) {
@@ -42,9 +46,10 @@ const SignIn = () => {
       profilePic: uploadedProfileUrl,
     });
 
-    if (newUser._id) {
+    if (newUser.result._id) {
+      setAccessToken(newUser.userToken);
       toast.success("User Successfully Created");
-      navigate("/chat", { replace: true });
+      // navigate("/chat", { replace: true });
     }
   };
 
@@ -134,7 +139,7 @@ const SignIn = () => {
               ImgUploadLoading && "loading"
             } btn btn-primary w-full md:w-full text-white`}
           >
-            Next
+            Sign Up
           </button>
         </div>
       </form>
