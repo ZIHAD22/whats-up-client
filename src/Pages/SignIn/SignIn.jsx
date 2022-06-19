@@ -1,21 +1,34 @@
 import axios from "../../util/axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "../../Components/Avatar";
 import Title from "../../Components/Title";
+import { toast } from "react-toastify";
+import useSetAccessToken from "../../hooks/useSetAccessToken";
 
 const SignIn = () => {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [setAccessToken] = useSetAccessToken();
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const handleSignIn = async (data) => {
-    const signInUser = await axios.post("/signIn", data);
+    const { data: signInUser } = await axios.post("/signIn", data);
 
-    console.log(signInUser);
+    if (!signInUser.success) {
+      reset();
+      toast.error(signInUser.result);
+    } else {
+      const { result, userToken } = signInUser;
+      setAccessToken(userToken);
+      reset();
+      navigate("/");
+    }
   };
 
   return (
