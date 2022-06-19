@@ -15,10 +15,10 @@ function App() {
   return (
     <div className="max-w-[1300px] mx-auto">
       <Routes>
-        <Route path="/" element={<SignIn />} />
+        <Route path="/signIn" element={<SignIn />} />
         <Route path="/signUp" element={<SignUp />} />
         <Route
-          path="/chat"
+          path="/"
           element={
             <RequireAuth>
               <Chat />

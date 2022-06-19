@@ -5,7 +5,7 @@ const Spinner = (widthOrHeight) => {
     <div className="h-screen flex justify-center items-center">
       <svg
         role="status"
-        class="h-20 w-20 animate-spin mr-2 text-primary fill-white "
+        className="h-20 w-20 animate-spin mr-2 text-primary fill-white "
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

@@ -1,7 +1,7 @@
 import axios from "../../util/axios.js";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Avatar from "../../Components/Avatar";
 import Title from "../../Components/Title";
 import { toast } from "react-toastify";
@@ -132,6 +132,14 @@ const SignIn = () => {
               className="input input-bordered w-full"
               {...register("profileImg")}
             />
+          </div>
+          <div className="my-2">
+            <span>
+              Have an Account?{" "}
+              <Link to="/signIn" className="link link-primary">
+                Sign In
+              </Link>
+            </span>
           </div>
           <button
             className={` ${

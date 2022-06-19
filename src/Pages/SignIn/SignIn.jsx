@@ -66,7 +66,7 @@ const SignIn = () => {
             Sign In
           </button>
           <div className="text-lg text-primary text-center my-5 font-bold hover:underline">
-            <Link to="signUp">Create Account</Link>
+            <Link to="/signUp">Create Account</Link>
           </div>
         </div>
       </form>
