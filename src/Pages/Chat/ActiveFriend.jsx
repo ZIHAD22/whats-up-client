@@ -1,10 +1,10 @@
 import React from "react";
 
-const ActiveFriend = ({ width = null }) => {
+const ActiveFriend = ({ width = null  , activePic}) => {
   return (
     <div className="avatar online">
       <div className={`${width || "w-16"} rounded-full`}>
-        <img src="https://api.lorem.space/image/face?hash=28212" alt="user" />
+        <img src={activePic} alt="user" />
       </div>
     </div>
   );
