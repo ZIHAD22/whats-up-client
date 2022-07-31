@@ -6,7 +6,7 @@ const ChatInput = () => {
     <div className="grid grid-cols-6 mt-5">
       <div className="flex justify-center items-center">
         <div className="dropdown">
-          <label tabindex="0" className="btn btn-ghost btn-circle">
+          <label tabIndex="0" className="btn btn-ghost btn-circle">
             <svg
               className="h-12 w-16 text-primary"
               viewBox="0 0 20 20"
@@ -20,7 +20,7 @@ const ChatInput = () => {
             </svg>
           </label>
           {/* <ul
-              tabindex="0"
+              tabIndex="0"
               className="menu menu-compact dropdown-content top-[-140px] mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>

@@ -1,6 +1,7 @@
 import React from "react";
 
 const ActiveFriend = ({ width = null  , activePic}) => {
+  // console.log(activePic);
   return (
     <div className="avatar online">
       <div className={`${width || "w-16"} rounded-full`}>
