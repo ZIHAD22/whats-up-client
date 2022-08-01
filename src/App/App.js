@@ -10,10 +10,14 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import RequireAuth from '../Components/RequireAuth'
 import useAllUser from '../hooks/useAllUser'
+import useAuthUser from '../hooks/useAuthUser'
+import Spinner from '../Components/Spinner'
+import Settings from '../Pages/Settings/Settings'
 // TODO: in verson 2 work with profile view before login
 
 function App() {
   const [allUsers] = useAllUser()
+
   return (
     <div className="max-w-[1300px] mx-auto">
       <Routes>
@@ -30,6 +34,7 @@ function App() {
           <Route path="chatResult/:id" element={<ChattingArea />} />
           <Route path="FriendProfile/:id" element={<ChattingArea />} />
         </Route>
+        <Route path="/settings" element={<Settings />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer />

@@ -19,20 +19,20 @@ const ChatInput = () => {
               />
             </svg>
           </label>
-          {/* <ul
+          <ul
               tabIndex="0"
-              className="menu menu-compact dropdown-content top-[-140px] mt-3 p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-compact dropdown-content top-[-140px] mt-3 p-2 shadow bg-base-200 rounded-box w-52"
             >
               <li>
-                <a>Homepage</a>
+                <a href=".">Homepage</a>
               </li>
               <li>
-                <a>Portfolio</a>
+                <a href=".">Portfolio</a>
               </li>
               <li>
-                <a>About</a>
+                <a href=".">About</a>
               </li>
-            </ul> */}
+            </ul>
         </div>
       </div>
       <div className="col-span-4">
