@@ -7,7 +7,7 @@ import Title from "../../Components/Title";
 import { toast } from "react-toastify";
 import useSetAccessToken from "../../hooks/useSetAccessToken";
 
-const SignIn = () => {
+const SignIn = ({ refetch }) => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [setAccessToken] = useSetAccessToken();
@@ -28,7 +28,12 @@ const SignIn = () => {
       setAccessToken(userToken);
       reset();
       navigate("/");
+      refetch();
     }
+  };
+
+  const handleChatReFetch = () => {
+    refetch();
   };
 
   return (
@@ -80,7 +85,10 @@ const SignIn = () => {
               Forget Password
             </Link>
           </div>
-          <button className="btn btn-primary w-full md:w-full text-white">
+          <button
+            onClick={handleChatReFetch}
+            className="btn btn-primary w-full md:w-full text-white"
+          >
             Sign In
           </button>
           <div className="text-lg text-primary text-center my-5 font-bold hover:underline">

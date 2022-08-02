@@ -2,15 +2,24 @@ import "../../CustomCss/Messages.css";
 import React from "react";
 import Header from "./Header";
 import Friend from "./Friend";
+import Spinner from "../../Components/Spinner";
 
-
-const Messages = ({allUsers , selectedFriendId}) => {
+const Messages = ({ allUsers, selectedFriendId, isLoading }) => {
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div className="h-screen pr-0">
       <div className="shadow-md p-3 rounded-md">
         <Header />
         <div className="overflow-y-scroll p-5 messageAreaHeight no-scrollbarChrome no-scrollbarFirefox">
-          {allUsers?.map(user => <Friend key={user._id} user={user} selectedFriendId={selectedFriendId} />)}
+          {allUsers?.map((user) => (
+            <Friend
+              key={user._id}
+              user={user}
+              selectedFriendId={selectedFriendId}
+            />
+          ))}
         </div>
       </div>
     </div>

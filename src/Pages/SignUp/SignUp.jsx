@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import useImgUpload from "../../hooks/useImgUpload.js";
 import useSetAccessToken from "../../hooks/useSetAccessToken.js";
 
-const SignIn = () => {
+const SignIn = ({ refetch }) => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [imgUpload, ImgUploadLoading, setUploadLoading] = useImgUpload();
@@ -52,6 +52,7 @@ const SignIn = () => {
       toast.success("User Successfully Created");
       reset();
       navigate("/", { replace: true });
+      refetch();
     }
   };
 
