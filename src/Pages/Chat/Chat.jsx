@@ -12,11 +12,15 @@ import { useEffect } from "react";
 const Chat = () => {
   const [allUsers, isLoading] = useAllUser();
   const [selectedId, setSelectedId] = useState("");
+  const [isAutoSelected, setAutoSelect] = useState(false);
   const selectedFriendId = (id) => {
     setSelectedId(id);
   };
   const [selectedFriend] = useSelectedFriend(selectedId);
-
+  useEffect(() => {
+    setAutoSelect(!isAutoSelected);
+  }, []);
+  // console.log(allUsers[0]?._id);
   return (
     <div>
       <Title title="messages" />
@@ -26,7 +30,10 @@ const Chat = () => {
           <Messages
             allUsers={allUsers}
             selectedFriendId={selectedFriendId}
+            setSelectedId={setSelectedId}
             isLoading={isLoading}
+            selectedId={selectedId}
+            isAutoSelected={isAutoSelected}
           />
         </div>
         <div className="col-span-2">

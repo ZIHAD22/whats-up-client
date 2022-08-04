@@ -31,7 +31,7 @@ function App() {
           }
         >
           <Route path="chatResult/:id" element={<ChattingArea />} />
-          <Route path="FriendProfile/:id" element={<ChattingArea />} />
+          {/* <Route path="FriendProfile/:id" element={<ChattingArea />} /> */}
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

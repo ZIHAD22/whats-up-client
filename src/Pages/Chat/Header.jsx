@@ -5,7 +5,7 @@ import Avatar from "../../Components/Avatar";
 import SettingsModal from "../Settings/SettingsModal";
 const flexCss = "flex justify-center items-center";
 
-const Header = () => {
+const Header = ({ selectedId }) => {
   const [isSettingsModalShow, setSettingsModa] = useState(false);
 
   return (
@@ -13,7 +13,7 @@ const Header = () => {
       <div className={`flex items-center justify-start`}>
         <div className="indicator">
           <span className="indicator-item badge badge-primary">99+</span>
-          <Avatar width="w-[50px]" />
+          <Avatar width="w-[50px]" selectedId={selectedId} />
         </div>
         <span className="text-3xl px-10">
           Whats-Up <span className="text-sm block">Verson: 1.00</span>
