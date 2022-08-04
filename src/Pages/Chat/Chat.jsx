@@ -10,7 +10,8 @@ import Spinner from "../../Components/Spinner";
 import { useEffect } from "react";
 
 const Chat = () => {
-  const [allUsers, isLoading] = useAllUser();
+  const [searchKey, setSearchKey] = useState("");
+  const [allUsers, isLoading] = useAllUser(searchKey);
   const [selectedId, setSelectedId] = useState("");
   const [isAutoSelected, setAutoSelect] = useState(false);
   const selectedFriendId = (id) => {
@@ -20,6 +21,11 @@ const Chat = () => {
   useEffect(() => {
     setAutoSelect(!isAutoSelected);
   }, []);
+
+  const handleSearchKey = (e, searchKey) => {
+    setSearchKey(e.target.value);
+  };
+
   // console.log(allUsers[0]?._id);
   return (
     <div>
@@ -34,6 +40,8 @@ const Chat = () => {
             isLoading={isLoading}
             selectedId={selectedId}
             isAutoSelected={isAutoSelected}
+            handleSearch={handleSearchKey}
+            searchKey={searchKey}
           />
         </div>
         <div className="col-span-2">

@@ -5,7 +5,7 @@ import Avatar from "../../Components/Avatar";
 import SettingsModal from "../Settings/SettingsModal";
 const flexCss = "flex justify-center items-center";
 
-const Header = ({ selectedId }) => {
+const Header = ({ selectedId, handleSearch, searchKey }) => {
   const [isSettingsModalShow, setSettingsModa] = useState(false);
 
   return (
@@ -30,6 +30,8 @@ const Header = ({ selectedId }) => {
       <div className={`${flexCss} my-4`}>
         <input
           type="text"
+          onChange={handleSearch}
+          value={searchKey}
           placeholder="Search People and chats"
           className="input input-bordered input-primary w-full max-w-xs"
         />

@@ -28,14 +28,8 @@ const SignIn = ({ refetch }) => {
       setAccessToken(userToken);
       reset();
       navigate("/");
-      refetch();
     }
   };
-
-  const handleChatReFetch = () => {
-    refetch();
-  };
-
   return (
     <div className="lg:w-1/2 w-full mx-auto">
       <Title title="Sign In" />
@@ -85,10 +79,7 @@ const SignIn = ({ refetch }) => {
               Forget Password
             </Link>
           </div>
-          <button
-            onClick={handleChatReFetch}
-            className="btn btn-primary w-full md:w-full text-white"
-          >
+          <button className="btn btn-primary w-full md:w-full text-white">
             Sign In
           </button>
           <div className="text-lg text-primary text-center my-5 font-bold hover:underline">
