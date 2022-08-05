@@ -16,7 +16,7 @@ const Chat = ({ selectedId, setSelectedId, selectedFriendId }) => {
   const [selectedFriend] = useSelectedFriend(selectedId);
   useEffect(() => {
     setAutoSelect(!isAutoSelected);
-  }, []);
+  }, [isAutoSelected]);
 
   const handleSearchKey = (e, searchKey) => {
     setSearchKey(e.target.value);

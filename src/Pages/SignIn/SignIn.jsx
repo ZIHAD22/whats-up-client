@@ -24,7 +24,7 @@ const SignIn = ({ refetch }) => {
       reset();
       toast.error(signInUser.result);
     } else {
-      const { result, userToken } = signInUser;
+      const { userToken } = signInUser;
       setAccessToken(userToken);
       reset();
       navigate("/");

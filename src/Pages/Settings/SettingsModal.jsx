@@ -5,7 +5,7 @@ import logOut from "../../util/logOut";
 
 const SettingsModal = ({ setSettingsModa }) => {
   const navigate = useNavigate();
-  const [user, loading] = useAuthUser();
+  const [user] = useAuthUser();
 
   return (
     <div>

@@ -22,7 +22,14 @@ const Messages = ({
       navigate(`/chatResult/${allUsers && allUsers[0]._id}`);
       setSelectedId(allUsers[0]._id);
     }
-  }, [allUsers, isAutoSelected]);
+  }, [
+    allUsers,
+    isAutoSelected,
+    isLoading,
+    setSelectedId,
+    selectedId,
+    navigate,
+  ]);
 
   return (
     <div className="h-screen pr-0">

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import axios from "../util/axios";
 import { useQuery } from "@tanstack/react-query";
 import useAuthUser from "./useAuthUser";
@@ -10,7 +9,6 @@ const useAllUser = (searchKey) => {
     data: allSelectUser,
     refetch,
     isLoading,
-    isError,
   } = useQuery(["allSelectedUser", loading, searchKey], async () => {
     if (userEmail && !searchKey) {
       const loginUser = userEmail;
@@ -20,7 +18,7 @@ const useAllUser = (searchKey) => {
       const loginUser = userEmail;
       const lowerSearchKey = searchKey.toLowerCase();
       const { data } = await axios.get(
-        `auth/allUser?email=${loginUser}&searchKey=${searchKey}`
+        `auth/allUser?email=${loginUser}&searchKey=${lowerSearchKey}`
       );
 
       console.log(data);
