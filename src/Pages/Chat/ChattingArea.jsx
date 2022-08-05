@@ -4,7 +4,6 @@ import ChatInput from "./ChatInput";
 import AllMessages from "./AllMessages";
 import useSelectedFriend from "../../hooks/useSelectedFriend";
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
 
 const ChattingArea = ({ setSelectedId }) => {
   let { id } = useParams();

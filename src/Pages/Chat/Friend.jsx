@@ -1,10 +1,7 @@
-import axios from "../../util/axios";
 import React from "react";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import curvedArrow from "../../img/curved-arrow-left.svg";
 import ActiveFriend from "./ActiveFriend";
-import Spinner from "../../Components/Spinner";
 
 const Friend = ({ user: { name, profilePic, _id }, selectedFriendId }) => {
   return (

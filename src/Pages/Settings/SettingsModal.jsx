@@ -1,6 +1,5 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Spinner from "../../Components/Spinner";
 import useAuthUser from "../../hooks/useAuthUser";
 import logOut from "../../util/logOut";
 

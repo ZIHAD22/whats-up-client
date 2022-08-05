@@ -1,12 +1,11 @@
 import React from "react";
 import Messages from "./Messages";
 import Title from "../../Components/Title";
-import { Outlet, useOutlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import FriendProfile from "./FriendProfile";
 import useAllUser from "../../hooks/useAllUser";
 import { useState } from "react";
 import useSelectedFriend from "../../hooks/useSelectedFriend";
-import Spinner from "../../Components/Spinner";
 import { useEffect } from "react";
 
 const Chat = ({ selectedId, setSelectedId, selectedFriendId }) => {

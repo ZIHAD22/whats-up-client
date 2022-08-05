@@ -2,7 +2,6 @@ import "../../CustomCss/Messages.css";
 import React from "react";
 import Header from "./Header";
 import Friend from "./Friend";
-import Spinner from "../../Components/Spinner";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
