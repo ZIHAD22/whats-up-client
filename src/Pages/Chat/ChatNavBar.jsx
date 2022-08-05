@@ -13,10 +13,12 @@ const ChatNavBar = ({ selectedFriend, setSelectedId }) => {
   return (
     <div className="navbar bg-base-100 shadow-md ">
       <div className="flex-1">
-        <ArrowCircleLeftIcon
-          onClick={handleNavigationMobile}
-          className="h-12 w-16 text-primary"
-        />
+        <div className="md:hidden block cursor-pointer">
+          <ArrowCircleLeftIcon
+            onClick={handleNavigationMobile}
+            className="h-12 w-16 text-primary"
+          />
+        </div>
         <ActiveFriend activePic={selectedFriend?.profilePic} />
         <div className="ml-2">
           <h1 className="normal-case text-xl">{selectedFriend?.name}</h1>
