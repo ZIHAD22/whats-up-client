@@ -1,7 +1,7 @@
 import React from "react";
 import Messages from "./Messages";
 import Title from "../../Components/Title";
-import { Outlet } from "react-router-dom";
+import { Outlet, useOutlet } from "react-router-dom";
 import FriendProfile from "./FriendProfile";
 import useAllUser from "../../hooks/useAllUser";
 import { useState } from "react";
@@ -9,14 +9,11 @@ import useSelectedFriend from "../../hooks/useSelectedFriend";
 import Spinner from "../../Components/Spinner";
 import { useEffect } from "react";
 
-const Chat = () => {
+const Chat = ({ selectedId, setSelectedId, selectedFriendId }) => {
   const [searchKey, setSearchKey] = useState("");
   const [allUsers, isLoading] = useAllUser(searchKey);
-  const [selectedId, setSelectedId] = useState("");
   const [isAutoSelected, setAutoSelect] = useState(false);
-  const selectedFriendId = (id) => {
-    setSelectedId(id);
-  };
+
   const [selectedFriend] = useSelectedFriend(selectedId);
   useEffect(() => {
     setAutoSelect(!isAutoSelected);
@@ -26,12 +23,11 @@ const Chat = () => {
     setSearchKey(e.target.value);
   };
 
-  // console.log(allUsers[0]?._id);
   return (
     <div>
       <Title title="messages" />
-      <div className="grid grid-cols-4">
-        <div>
+      <div className="grid md:grid-cols-4 grid-cols-1">
+        <div className={`${selectedId ? "hidden" : "block"} md:block`}>
           {/* div for see all message */}
           <Messages
             allUsers={allUsers}
@@ -44,11 +40,13 @@ const Chat = () => {
             searchKey={searchKey}
           />
         </div>
-        <div className="col-span-2">
+        <div
+          className={`col-span-2 ${!selectedId ? "hidden" : "block"} md:block`}
+        >
           {/* div for selected message see  */}
           <Outlet />
         </div>
-        <div>
+        <div className="md:block hidden">
           {/* div for profile */}
           <FriendProfile selectedFriend={selectedFriend} />
         </div>

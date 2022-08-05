@@ -17,8 +17,9 @@ const Messages = ({
   searchKey,
 }) => {
   let navigate = useNavigate();
+
   useEffect(() => {
-    if (!selectedId && !isLoading && allUsers) {
+    if (!selectedId && !isLoading && allUsers && window.innerWidth >= 411) {
       navigate(`/chatResult/${allUsers && allUsers[0]._id}`);
       setSelectedId(allUsers[0]._id);
     }

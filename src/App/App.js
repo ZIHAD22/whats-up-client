@@ -17,6 +17,10 @@ import { useState } from "react";
 // TODO: in verson 2 work with profile view before login
 
 function App() {
+  const [selectedId, setSelectedId] = useState("");
+  const selectedFriendId = (id) => {
+    setSelectedId(id);
+  };
   return (
     <div className="max-w-[1300px] mx-auto">
       <Routes>
@@ -26,12 +30,18 @@ function App() {
           path="/"
           element={
             <RequireAuth>
-              <Chat />
+              <Chat
+                selectedId={selectedId}
+                setSelectedId={setSelectedId}
+                selectedFriendId={selectedFriendId}
+              />
             </RequireAuth>
           }
         >
-          <Route path="chatResult/:id" element={<ChattingArea />} />
-          {/* <Route path="FriendProfile/:id" element={<ChattingArea />} /> */}
+          <Route
+            path="chatResult/:id"
+            element={<ChattingArea setSelectedId={setSelectedId} />}
+          />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>

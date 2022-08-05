@@ -1,12 +1,22 @@
+import { ArrowCircleLeftIcon } from "@heroicons/react/solid";
 import React from "react";
-import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import ActiveFriend from "./ActiveFriend";
 
-const ChatNavBar = ({selectedFriend}) => {
+const ChatNavBar = ({ selectedFriend, setSelectedId }) => {
+  let navigate = useNavigate();
 
+  const handleNavigationMobile = () => {
+    navigate("/");
+    setSelectedId("");
+  };
   return (
     <div className="navbar bg-base-100 shadow-md ">
       <div className="flex-1">
+        <ArrowCircleLeftIcon
+          onClick={handleNavigationMobile}
+          className="h-12 w-16 text-primary"
+        />
         <ActiveFriend activePic={selectedFriend?.profilePic} />
         <div className="ml-2">
           <h1 className="normal-case text-xl">{selectedFriend?.name}</h1>
@@ -29,20 +39,20 @@ const ChatNavBar = ({selectedFriend}) => {
             ></path>
           </svg>
         </label>
-        {/* <ul
+        <ul
           tabIndex="0"
           className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
         >
           <li>
-            <a>Homepage</a>
+            <a href=".">Homepage</a>
           </li>
           <li>
-            <a>Portfolio</a>
+            <a href=".">Homepage</a>
           </li>
           <li>
-            <a>About</a>
+            <a href=".">Homepage</a>
           </li>
-        </ul> */}
+        </ul>
       </div>
     </div>
   );
