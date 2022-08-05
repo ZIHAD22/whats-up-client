@@ -9,10 +9,6 @@ import "tw-elements";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequireAuth from "../Components/RequireAuth";
-import useAllUser from "../hooks/useAllUser";
-import useAuthUser from "../hooks/useAuthUser";
-import Spinner from "../Components/Spinner";
-import Settings from "../Pages/Settings/SettingsModal";
 import { useState } from "react";
 // TODO: in verson 2 work with profile view before login
 
