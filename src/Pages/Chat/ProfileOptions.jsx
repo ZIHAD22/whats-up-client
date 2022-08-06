@@ -20,7 +20,6 @@ const ProfileOptions = () => {
         bg-white
         border-0
         rounded-none
-        transition
         focus:outline-none
       "
               type="button"
@@ -66,7 +65,6 @@ const ProfileOptions = () => {
         bg-white
         border-0
         rounded-none
-        transition
         focus:outline-none
       "
               type="button"
