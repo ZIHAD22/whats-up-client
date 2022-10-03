@@ -7,13 +7,25 @@ import useAllUser from "../../hooks/useAllUser";
 import { useState } from "react";
 import useSelectedFriend from "../../hooks/useSelectedFriend";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllUser } from "../../features/chat/allUserSlice";
+import useAuthUser from "../../hooks/useAuthUser";
 
 const Chat = ({ selectedId, setSelectedId, selectedFriendId }) => {
   const [searchKey, setSearchKey] = useState("");
-  const [allUsers, isLoading] = useAllUser(searchKey);
+  const [user, loading] = useAuthUser();
+  const loginUser = user.user?.email;
+  // const [allUsers, isLoading] = useAllUser(searchKey);
   const [isAutoSelected, setAutoSelect] = useState(false);
+  const {allUser:{result:allUsers} , isLoading} = useSelector(state => state.allUser)
+  const dispatch = useDispatch()
 
   const [selectedFriend] = useSelectedFriend(selectedId);
+
+  useEffect(() => {
+    dispatch(fetchAllUser(loginUser))
+  } , [loginUser])
+
   useEffect(() => {
     setAutoSelect(!isAutoSelected);
   }, []);

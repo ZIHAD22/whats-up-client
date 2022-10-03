@@ -7,7 +7,7 @@ import Title from "../../Components/Title";
 import { toast } from "react-toastify";
 import useSetAccessToken from "../../hooks/useSetAccessToken";
 
-const SignIn = ({ refetch }) => {
+const SignIn = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [setAccessToken] = useSetAccessToken();
