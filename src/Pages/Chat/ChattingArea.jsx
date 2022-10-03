@@ -17,7 +17,7 @@ const ChattingArea = ({ setSelectedId }) => {
         setSelectedId={setSelectedId}
       />
       <AllMessages />
-      <ChatInput />
+      <ChatInput selectedFriend={selectedFriend} />
     </div>
   );
 };

@@ -1,7 +1,28 @@
+import axios from "../../util/axios";
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
 import React from "react";
+import { useState } from "react";
+import useAuthUser from "../../hooks/useAuthUser";
 
-const ChatInput = () => {
+const ChatInput = ({ selectedFriend }) => {
+  const [user] = useAuthUser();
+  const [sendingMessages, setSenddingMessages] = useState("");
+  const handleMessages = (e) => {
+    setSenddingMessages(e.target.value);
+  };
+
+  const handleSenddingMessages = async () => {
+    const { data } = await axios.put("/messages", {
+      user: [user.user._id, selectedFriend._id],
+      firstSender: user.user._id,
+      lastSender: user.user._id,
+      lastMessages: sendingMessages,
+      senddingTo: selectedFriend._id,
+    });
+    console.log(data);
+    setSenddingMessages("");
+  };
+
   return (
     <div className="grid grid-cols-6 mt-5">
       <div className="flex justify-center items-center">
@@ -20,29 +41,34 @@ const ChatInput = () => {
             </svg>
           </label>
           <ul
-              tabIndex="0"
-              className="menu menu-compact dropdown-content top-[-140px] mt-3 p-2 shadow bg-base-200 rounded-box w-52"
-            >
-              <li>
-                <a href=".">Homepage</a>
-              </li>
-              <li>
-                <a href=".">Portfolio</a>
-              </li>
-              <li>
-                <a href=".">About</a>
-              </li>
-            </ul>
+            tabIndex="0"
+            className="menu menu-compact dropdown-content top-[-140px] mt-3 p-2 shadow bg-base-200 rounded-box w-52"
+          >
+            <li>
+              <a href=".">Homepage</a>
+            </li>
+            <li>
+              <a href=".">Portfolio</a>
+            </li>
+            <li>
+              <a href=".">About</a>
+            </li>
+          </ul>
         </div>
       </div>
       <div className="col-span-4">
         <input
           type="text"
+          onChange={handleMessages}
+          value={sendingMessages}
           placeholder="Type here"
           className="input input-bordered input-primary w-full"
         />
       </div>
-      <button className="flex justify-center items-center">
+      <button
+        className="flex justify-center items-center"
+        onClick={handleSenddingMessages}
+      >
         <ArrowCircleRightIcon className="h-12 w-16 text-primary" />
       </button>
     </div>
