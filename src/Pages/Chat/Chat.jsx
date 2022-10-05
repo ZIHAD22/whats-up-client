@@ -3,19 +3,17 @@ import Messages from "./Messages";
 import Title from "../../Components/Title";
 import { Outlet } from "react-router-dom";
 import FriendProfile from "./FriendProfile";
-import useAllUser from "../../hooks/useAllUser";
 import { useState } from "react";
 import useSelectedFriend from "../../hooks/useSelectedFriend";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllUser } from "../../features/chat/allUserSlice";
+import { fetchAllUser, getSearchKey, searchUsersData } from "../../features/chat/allUserSlice";
 import useAuthUser from "../../hooks/useAuthUser";
 
 const Chat = ({ selectedId, setSelectedId, selectedFriendId }) => {
   const [searchKey, setSearchKey] = useState("");
   const [user, loading] = useAuthUser();
   const loginUser = user.user?.email;
-  // const [allUsers, isLoading] = useAllUser(searchKey);
   const [isAutoSelected, setAutoSelect] = useState(false);
   const {allUser:{result:allUsers} , isLoading} = useSelector(state => state.allUser)
   const dispatch = useDispatch()
@@ -23,8 +21,13 @@ const Chat = ({ selectedId, setSelectedId, selectedFriendId }) => {
   const [selectedFriend] = useSelectedFriend(selectedId);
 
   useEffect(() => {
-    dispatch(fetchAllUser(loginUser))
-  } , [loginUser])
+    if(searchKey){
+      dispatch(getSearchKey(searchKey))
+      dispatch(searchUsersData(loginUser))
+    }else{
+      dispatch(fetchAllUser(loginUser))
+    }
+  } , [loginUser , searchKey])
 
   useEffect(() => {
     setAutoSelect(!isAutoSelected);
