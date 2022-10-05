@@ -11,32 +11,12 @@ import { fetchAllUser, getSearchKey, searchUsersData } from "../../features/chat
 import useAuthUser from "../../hooks/useAuthUser";
 
 const Chat = ({ selectedId, setSelectedId, selectedFriendId }) => {
-  const [searchKey, setSearchKey] = useState("");
-  const [user, loading] = useAuthUser();
-  const loginUser = user.user?.email;
   const [isAutoSelected, setAutoSelect] = useState(false);
-  const {allUser:{result:allUsers} , isLoading} = useSelector(state => state.allUser)
-  const dispatch = useDispatch()
-
   const [selectedFriend] = useSelectedFriend(selectedId);
-
-  useEffect(() => {
-    if(searchKey){
-      dispatch(getSearchKey(searchKey))
-      dispatch(searchUsersData(loginUser))
-    }else{
-      dispatch(fetchAllUser(loginUser))
-    }
-  } , [loginUser , searchKey])
 
   useEffect(() => {
     setAutoSelect(!isAutoSelected);
   }, []);
-
-  const handleSearchKey = (e, searchKey) => {
-    setSearchKey(e.target.value);
-  };
-
   return (
     <div>
       <Title title="messages" />
@@ -44,14 +24,13 @@ const Chat = ({ selectedId, setSelectedId, selectedFriendId }) => {
         <div className={`${selectedId ? "hidden" : "block"} md:block`}>
           {/* div for see all message */}
           <Messages
-            allUsers={allUsers}
             selectedFriendId={selectedFriendId}
             setSelectedId={setSelectedId}
-            isLoading={isLoading}
+            // isLoading={isLoading}
             selectedId={selectedId}
             isAutoSelected={isAutoSelected}
-            handleSearch={handleSearchKey}
-            searchKey={searchKey}
+            // handleSearch={handleSearchKey}
+            // searchKey={searchKey}
           />
         </div>
         <div

@@ -1,34 +1,55 @@
 import "../../CustomCss/Messages.css";
-import React from "react";
+import React, { useState } from "react";
 import Header from "./Header";
 import Friend from "./Friend";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import useAuthUser from "../../hooks/useAuthUser";
+import { fetchAllUser, getSearchKey, searchUsersData } from "../../features/chat/allUserSlice";
+import Spinner from "../../Components/Spinner";
 
 const Messages = ({
-  allUsers,
   selectedFriendId,
-  isLoading,
   selectedId,
   setSelectedId,
   isAutoSelected,
-  handleSearch,
-  searchKey,
 }) => {
   let navigate = useNavigate();
-
+  const dispatch = useDispatch()
+  
+  const currentWindowWidth = window.innerWidth
+  const [searchKey, setSearchKey] = useState("");
+  const [user, loading] = useAuthUser();
+  const loginUser = user.user?.email;
+  
+  const [allUser , {isLoading:searchLoading} , isLoading , ] = useSelector(state => [state.allUser.allUser.result , state.allUser.userSearch , state.allUser.isLoading  ])
   useEffect(() => {
-    if (!selectedId && !isLoading && allUsers && window.innerWidth >= 411) {
-      navigate(`/chatResult/${allUsers && allUsers[0]._id}`);
-      setSelectedId(allUsers[0]._id);
+    if(searchKey){
+      dispatch(getSearchKey(searchKey))
+      dispatch(searchUsersData(loginUser))
+    }else{
+      dispatch(fetchAllUser(loginUser))
+    }
+  } , [loginUser , searchKey])
+  
+  const handleSearch = (e, searchKey) => {
+    setSearchKey(e.target.value);
+  };
+  
+  useEffect(() => {
+    if (!selectedId && !isLoading && allUser && currentWindowWidth >= 411) {
+      navigate(`/chatResult/${allUser && allUser[0]._id}`);
+      setSelectedId(allUser[0]._id);
     }
   }, [
-    allUsers,
+    allUser,
     isAutoSelected,
     isLoading,
     setSelectedId,
     selectedId,
     navigate,
+    currentWindowWidth
   ]);
 
   return (
@@ -38,15 +59,19 @@ const Messages = ({
           selectedId={selectedId}
           handleSearch={handleSearch}
           searchKey={searchKey}
-        />
+          />
         <div className="overflow-y-scroll p-5 messageAreaHeight no-scrollbarChrome no-scrollbarFirefox">
-          {allUsers?.map((user) => (
+          {(isLoading || searchLoading) ? <Spinner/> : 
+          <>
+          {allUser?.map((user) => (
             <Friend
               key={user._id}
               user={user}
               selectedFriendId={selectedFriendId}
             />
           ))}
+          </> 
+          }
         </div>
       </div>
     </div>

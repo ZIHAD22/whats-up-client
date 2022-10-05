@@ -15,14 +15,6 @@ const initialState = {
 const fetchAllUser = createAsyncThunk("allUser/fetchAllUser", async (loginUser, thunkApi) => {
 
     const { data: allUser } = await axios.get(`auth/allUser?email=${loginUser}`);
-
-    // if (lowerSearchKey) {
-    //     const { data: searchUser } = await axios.get(
-    //         `auth/allUser?email=${loginUser}&searchKey=${lowerSearchKey}`
-    //     );
-    //     return searchUser
-    // }
-
     return allUser
 })
 
@@ -50,7 +42,7 @@ const allUserSlice = createSlice({
             })
             .addCase(fetchAllUser.fulfilled, (state, action) => {
                 state.allUser = action.payload
-                state.isLoading = true
+                state.isLoading = false
                 state.error = null
             })
             .addCase(fetchAllUser.rejected, (state, action) => {
@@ -63,11 +55,11 @@ const allUserSlice = createSlice({
             })
             .addCase(searchUsersData.fulfilled, (state, action) => {
                 state.allUser = action.payload
-                state.isLoading = false
+                state.userSearch.isLoading = false
                 state.error = null
             })
             .addCase(searchUsersData.rejected, (state, action) => {
-                state.isLoading = false
+                state.userSearch.isLoading = false
                 state.error = action.payload
             })
     }
