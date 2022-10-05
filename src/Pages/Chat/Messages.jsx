@@ -22,8 +22,10 @@ const Messages = ({
   const [searchKey, setSearchKey] = useState("");
   const [user, loading] = useAuthUser();
   const loginUser = user.user?.email;
-  
+
   const [allUser , {isLoading:searchLoading} , isLoading , ] = useSelector(state => [state.allUser.allUser.result , state.allUser.userSearch , state.allUser.isLoading  ])
+
+  
   useEffect(() => {
     if(searchKey){
       dispatch(getSearchKey(searchKey))

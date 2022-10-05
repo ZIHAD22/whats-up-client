@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import useAuthUser from "../../hooks/useAuthUser";
+// import store from "../../store/store";
 import axios from "../../util/axios";
+import { fetchAuthUser } from "./authUserSlice";
+
+// dispatch auth user
+// store.dispatch(fetchAuthUser())
+
 const initialState = {
     allUser: [],
     userSearch: {
@@ -12,14 +17,15 @@ const initialState = {
     error: null
 }
 
-const fetchAllUser = createAsyncThunk("allUser/fetchAllUser", async (loginUser, thunkApi) => {
-
+const fetchAllUser = createAsyncThunk("allUser/fetchAllUser", async (arg, { dispatch, getState }) => {
+    const { payload: { user: { email: loginUser } } } = await dispatch(fetchAuthUser())
     const { data: allUser } = await axios.get(`auth/allUser?email=${loginUser}`);
     return allUser
 })
 
-const searchUsersData = createAsyncThunk("allUser/searchUsers", async (loginUser, thunkApi) => {
-    const { searchKey } = thunkApi.getState().allUser.userSearch
+const searchUsersData = createAsyncThunk("allUser/searchUsers", async (arg, { getState, dispatch }) => {
+    const { payload: { user: { email: loginUser } } } = await dispatch(fetchAuthUser())
+    const { searchKey } = getState().allUser.userSearch
     const lowerSearchKey = searchKey.toLowerCase();
     const { data: searchUsers } = await axios.get(
         `auth/allUser?email=${loginUser}&searchKey=${lowerSearchKey}`
