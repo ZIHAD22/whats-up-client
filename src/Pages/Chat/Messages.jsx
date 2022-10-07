@@ -5,7 +5,6 @@ import Friend from "./Friend";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import useAuthUser from "../../hooks/useAuthUser";
 import { fetchAllUser, getSearchKey, searchUsersData } from "../../features/chat/allUserSlice";
 import Spinner from "../../Components/Spinner";
 
@@ -20,8 +19,7 @@ const Messages = ({
   
   const currentWindowWidth = window.innerWidth
   const [searchKey, setSearchKey] = useState("");
-  const [user, loading] = useAuthUser();
-  const loginUser = user.user?.email;
+
 
   const [allUser , {isLoading:searchLoading} , isLoading , ] = useSelector(state => [state.allUser.allUser.result , state.allUser.userSearch , state.allUser.isLoading  ])
 
@@ -29,11 +27,11 @@ const Messages = ({
   useEffect(() => {
     if(searchKey){
       dispatch(getSearchKey(searchKey))
-      dispatch(searchUsersData(loginUser))
+      dispatch(searchUsersData())
     }else{
-      dispatch(fetchAllUser(loginUser))
+      dispatch(fetchAllUser())
     }
-  } , [loginUser , searchKey])
+  } , [searchKey])
   
   const handleSearch = (e, searchKey) => {
     setSearchKey(e.target.value);

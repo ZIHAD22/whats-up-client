@@ -1,11 +1,15 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
+import { fetchAuthUser } from "../features/chat/authUserSlice";
 import useAuthUser from "../hooks/useAuthUser";
+import useSelectedFriend from "../hooks/useSelectedFriend";
 import Spinner from "./Spinner";
 
 const RequireAuth = ({ children }) => {
-  const [user, loading] = useAuthUser();
   let location = useLocation();
+  const [user , loading] = useSelector(state => [state.authUser.user , state.authUser.authUserLoading])
 
   if (loading) {
     return <Spinner />;

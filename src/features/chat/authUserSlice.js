@@ -19,7 +19,9 @@ const authUserSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchAuthUser.pending, (state) => {
+                state.user = {}
                 state.authUserLoading = true
+                state.error = null
             })
             .addCase(fetchAuthUser.fulfilled, (state, action) => {
                 state.user = action.payload

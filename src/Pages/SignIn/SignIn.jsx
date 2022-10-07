@@ -6,8 +6,11 @@ import Avatar from "../../Components/Avatar";
 import Title from "../../Components/Title";
 import { toast } from "react-toastify";
 import useSetAccessToken from "../../hooks/useSetAccessToken";
+import { useDispatch } from "react-redux";
+import { fetchAuthUser } from "../../features/chat/authUserSlice";
 
 const SignIn = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [setAccessToken] = useSetAccessToken();
@@ -27,6 +30,7 @@ const SignIn = () => {
       const { userToken } = signInUser;
       setAccessToken(userToken);
       reset();
+      dispatch(fetchAuthUser())
       navigate("/");
     }
   };

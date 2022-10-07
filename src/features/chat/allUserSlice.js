@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 // import store from "../../store/store";
 import axios from "../../util/axios";
-import { fetchAuthUser } from "./authUserSlice";
+// import { fetchAuthUser } from "./authUserSlice";
 
 // dispatch auth user
 // store.dispatch(fetchAuthUser())
@@ -18,13 +18,14 @@ const initialState = {
 }
 
 const fetchAllUser = createAsyncThunk("allUser/fetchAllUser", async (arg, { dispatch, getState }) => {
-    const { payload: { user: { email: loginUser } } } = await dispatch(fetchAuthUser())
+    // const { payload: { user: { email: loginUser } } } = await dispatch(fetchAuthUser())
+    const { authUser: { user: { user: { email: loginUser } } } } = getState()
     const { data: allUser } = await axios.get(`auth/allUser?email=${loginUser}`);
     return allUser
 })
 
 const searchUsersData = createAsyncThunk("allUser/searchUsers", async (arg, { getState, dispatch }) => {
-    const { payload: { user: { email: loginUser } } } = await dispatch(fetchAuthUser())
+    const { authUser: { user: { user: { email: loginUser } } } } = getState()
     const { searchKey } = getState().allUser.userSearch
     const lowerSearchKey = searchKey.toLowerCase();
     const { data: searchUsers } = await axios.get(

@@ -6,9 +6,9 @@ import FriendProfile from "./FriendProfile";
 import { useState } from "react";
 import useSelectedFriend from "../../hooks/useSelectedFriend";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAllUser, getSearchKey, searchUsersData } from "../../features/chat/allUserSlice";
-import useAuthUser from "../../hooks/useAuthUser";
+
+
+
 
 const Chat = ({ selectedId, setSelectedId, selectedFriendId }) => {
   const [isAutoSelected, setAutoSelect] = useState(false);
