@@ -2,10 +2,11 @@ import axios from "../../util/axios";
 import { ArrowCircleRightIcon } from "@heroicons/react/solid";
 import React from "react";
 import { useState } from "react";
-import useAuthUser from "../../hooks/useAuthUser";
+import { useSelector } from "react-redux";
 
 const ChatInput = ({ selectedFriend }) => {
-  const [user] = useAuthUser();
+  const [user] = useSelector(state => [state.authUser.user])
+  console.log("check", user);
   const [sendingMessages, setSenddingMessages] = useState("");
   const handleMessages = (e) => {
     setSenddingMessages(e.target.value);

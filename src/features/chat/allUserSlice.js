@@ -1,11 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-// import store from "../../store/store";
 import axios from "../../util/axios";
-// import { fetchAuthUser } from "./authUserSlice";
-
-// dispatch auth user
-// store.dispatch(fetchAuthUser())
-
 const initialState = {
     allUser: [],
     userSearch: {

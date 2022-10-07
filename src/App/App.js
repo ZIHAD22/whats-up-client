@@ -10,13 +10,17 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequireAuth from "../Components/RequireAuth";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { fetchAuthUser } from "../features/chat/authUserSlice";
 // TODO: in verson 2 work with profile view before login
 
 function App() {
   const [selectedId, setSelectedId] = useState("");
+  const dispatch = useDispatch()
   const selectedFriendId = (id) => {
     setSelectedId(id);
   };
+  dispatch(fetchAuthUser())
   return (
     <div className="max-w-[1300px] mx-auto">
       <Routes>

@@ -7,10 +7,14 @@ const initialState = {
     error: null
 }
 
-const fetchAuthUser = createAsyncThunk("authUser/fetchAuthUser", async () => {
-    const { data: authUser } = await axios.get("auth/authUser")
-
-    return authUser
+const fetchAuthUser = createAsyncThunk("authUser/fetchAuthUser", async (arg, { rejectWithValue }) => {
+    if (localStorage.getItem("accessToken")) {
+        const { data: authUser } = await axios.get("auth/authUser")
+        return authUser
+    } else {
+        // toast.error("You Don't have access");
+        return rejectWithValue("You Don't have access")
+    }
 })
 
 const authUserSlice = createSlice({

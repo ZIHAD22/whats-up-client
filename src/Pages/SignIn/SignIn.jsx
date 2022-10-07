@@ -29,11 +29,12 @@ const SignIn = () => {
     } else {
       const { userToken } = signInUser;
       setAccessToken(userToken);
-      reset();
       dispatch(fetchAuthUser())
-      navigate("/");
+      reset();
+      navigate("/")
     }
   };
+
   return (
     <div className="lg:w-1/2 w-full mx-auto">
       <Title title="Sign In" />
