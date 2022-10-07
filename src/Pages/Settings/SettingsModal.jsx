@@ -1,11 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import useAuthUser from "../../hooks/useAuthUser";
 import logOut from "../../util/logOut";
 
 const SettingsModal = ({ setSettingsModa }) => {
   const navigate = useNavigate();
-  const [user] = useAuthUser();
+  const [user] = useSelector(state => [state.authUser.user])
 
   return (
     <div>
