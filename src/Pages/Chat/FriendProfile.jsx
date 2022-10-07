@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import ActiveFriend from "./ActiveFriend";
 import ProfileOptions from "./ProfileOptions";
 
-const FriendProfile = ({selectedFriend}) => {
+const FriendProfile = () => {
+  const [selectedFriend]  = useSelector(state => [state.allUser.selectedUser.selectedUserInfo])
   // console.log(selectedFriend);
   return (
     <div className="p-5 text-center shadow-md h-screen">

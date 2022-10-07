@@ -10,17 +10,20 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequireAuth from "../Components/RequireAuth";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthUser } from "../features/chat/authUserSlice";
+import WelcomeChat from "../Pages/Chat/WelcomeChat";
 // TODO: in verson 2 work with profile view before login
 
 function App() {
-  const [selectedId, setSelectedId] = useState("");
+  const [user, AuthUserLoading] = useSelector(state => [state.authUser.user, state.authUser.authUserLoading])
+  // const [selectedId, setSelectedId] = useState("");
   const dispatch = useDispatch()
-  const selectedFriendId = (id) => {
-    setSelectedId(id);
-  };
-  dispatch(fetchAuthUser())
+
+  if (!user.result && !AuthUserLoading) {
+    dispatch(fetchAuthUser())
+  }
+
   return (
     <div className="max-w-[1300px] mx-auto">
       <Routes>
@@ -30,17 +33,17 @@ function App() {
           path="/"
           element={
             <RequireAuth>
-              <Chat
-                selectedId={selectedId}
-                setSelectedId={setSelectedId}
-                selectedFriendId={selectedFriendId}
-              />
+              <Chat />
             </RequireAuth>
           }
         >
           <Route
             path="chatResult/:id"
-            element={<ChattingArea setSelectedId={setSelectedId} />}
+            element={<ChattingArea />}
+          />
+          <Route
+            path="chatResult"
+            element={<WelcomeChat />}
           />
         </Route>
         <Route path="*" element={<NotFound />} />

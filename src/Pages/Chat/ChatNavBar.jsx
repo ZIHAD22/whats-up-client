@@ -1,15 +1,21 @@
 import { ArrowCircleLeftIcon } from "@heroicons/react/solid";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { getSelectedUserId } from "../../features/chat/allUserSlice";
 import ActiveFriend from "./ActiveFriend";
 
-const ChatNavBar = ({ selectedFriend, setSelectedId }) => {
+const ChatNavBar = () => {
   let navigate = useNavigate();
+  const dispatch = useDispatch()
+
+  const [selectedFriend]  = useSelector(state => [state.allUser.selectedUser.selectedUserInfo])
 
   const handleNavigationMobile = () => {
     navigate("/");
-    setSelectedId("");
+    dispatch(getSelectedUserId(""));
   };
+
   return (
     <div className="navbar bg-base-100 shadow-md ">
       <div className="flex-1">

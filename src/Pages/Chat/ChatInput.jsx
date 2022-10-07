@@ -4,9 +4,9 @@ import React from "react";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
-const ChatInput = ({ selectedFriend }) => {
-  const [user] = useSelector(state => [state.authUser.user])
-  console.log("check", user);
+const ChatInput = () => {
+  const [user , selectedFriend] = useSelector(state => [state.authUser.user , state.allUser.selectedUser.selectedUserInfo])
+
   const [sendingMessages, setSenddingMessages] = useState("");
   const handleMessages = (e) => {
     setSenddingMessages(e.target.value);

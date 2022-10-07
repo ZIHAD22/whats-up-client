@@ -5,19 +5,14 @@ import AllMessages from "./AllMessages";
 import useSelectedFriend from "../../hooks/useSelectedFriend";
 import { useParams } from "react-router-dom";
 
-const ChattingArea = ({ setSelectedId }) => {
-  let { id } = useParams();
-
-  const [selectedFriend] = useSelectedFriend(id);
+const ChattingArea = () => {
 
   return (
     <div className="block overflow-hidden">
       <ChatNavBar
-        selectedFriend={selectedFriend}
-        setSelectedId={setSelectedId}
       />
       <AllMessages />
-      <ChatInput selectedFriend={selectedFriend} />
+      <ChatInput />
     </div>
   );
 };

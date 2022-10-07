@@ -7,6 +7,12 @@ const initialState = {
         isLoading: false,
         error: null
     },
+    selectedUser: {
+        selectedUserId: "",
+        selectedUserInfo: {},
+        isLoading: false,
+        error: null
+    },
     isLoading: false,
     error: null
 }
@@ -34,6 +40,20 @@ const allUserSlice = createSlice({
     reducers: {
         getSearchKey: (state, action) => {
             state.userSearch.searchKey = action.payload
+        },
+        getSelectedUserId: (state, action) => {
+            state.selectedUser.selectedUserId = action.payload
+        },
+        getSelectedUserInfo: (state) => {
+            state.selectedUser.isLoading = true
+            const userId = state.selectedUser.selectedUserId
+            if (userId) {
+                const filteredUser = state.allUser.result.filter(user => user._id === userId)
+                state.selectedUser.selectedUserInfo = filteredUser[0]
+                state.selectedUser.isLoading = false
+            } else {
+                state.selectedUser.error = "You do not select any friend"
+            }
         }
     },
     extraReducers: (builder) => {
@@ -66,12 +86,14 @@ const allUserSlice = createSlice({
     }
 })
 
-const { getSearchKey } = allUserSlice.actions
+const { getSearchKey, getSelectedUserId, getSelectedUserInfo } = allUserSlice.actions
 
 export {
     fetchAllUser,
     getSearchKey,
-    searchUsersData
+    searchUsersData,
+    getSelectedUserId,
+    getSelectedUserInfo,
 }
 
 export default allUserSlice.reducer

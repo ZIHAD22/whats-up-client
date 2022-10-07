@@ -6,32 +6,21 @@ import FriendProfile from "./FriendProfile";
 import { useState } from "react";
 import useSelectedFriend from "../../hooks/useSelectedFriend";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 
 
 
-const Chat = ({ selectedId, setSelectedId, selectedFriendId }) => {
-  const [isAutoSelected, setAutoSelect] = useState(false);
-  const [selectedFriend] = useSelectedFriend(selectedId);
+const Chat = ({ setSelectedId, selectedFriendId }) => {
+  const [selectedId] = useSelector(state => [state.allUser.selectedUser.selectedUserId])
 
-  useEffect(() => {
-    setAutoSelect(!isAutoSelected);
-  }, []);
   return (
     <div>
       <Title title="messages" />
       <div className="grid md:grid-cols-4 grid-cols-1">
         <div className={`${selectedId ? "hidden" : "block"} md:block`}>
           {/* div for see all message */}
-          <Messages
-            selectedFriendId={selectedFriendId}
-            setSelectedId={setSelectedId}
-            // isLoading={isLoading}
-            selectedId={selectedId}
-            isAutoSelected={isAutoSelected}
-            // handleSearch={handleSearchKey}
-            // searchKey={searchKey}
-          />
+          <Messages />
         </div>
         <div
           className={`col-span-2 ${!selectedId ? "hidden" : "block"} md:block`}
@@ -41,7 +30,7 @@ const Chat = ({ selectedId, setSelectedId, selectedFriendId }) => {
         </div>
         <div className="md:block hidden">
           {/* div for profile */}
-          <FriendProfile selectedFriend={selectedFriend} />
+          <FriendProfile />
         </div>
       </div>
     </div>

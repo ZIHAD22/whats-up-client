@@ -6,11 +6,12 @@ import Avatar from "../../Components/Avatar";
 import Title from "../../Components/Title";
 import { toast } from "react-toastify";
 import useSetAccessToken from "../../hooks/useSetAccessToken";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthUser } from "../../features/chat/authUserSlice";
 
 const SignIn = () => {
   const dispatch = useDispatch()
+  const [user] = useSelector(state => [state.authUser.user])
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [setAccessToken] = useSetAccessToken();
@@ -34,6 +35,10 @@ const SignIn = () => {
       navigate("/")
     }
   };
+
+  if(user.result){
+    return navigate("/")
+  }
 
   return (
     <div className="lg:w-1/2 w-full mx-auto">
