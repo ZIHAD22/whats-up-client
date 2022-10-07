@@ -1,18 +1,14 @@
 import "../../CustomCss/Messages.css";
-import React, { useState } from "react";
+import React from "react";
 import Header from "./Header";
 import Friend from "./Friend";
-import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllUser, getSearchKey, searchUsersData } from "../../features/chat/allUserSlice";
+import { fetchAllUser } from "../../features/chat/allUserSlice";
 import Spinner from "../../Components/Spinner";
 
 const Messages = () => {
-  let navigate = useNavigate();
   const dispatch = useDispatch()
-  
-  // const currentWindowWidth = window.innerWidth
 
   const [allUser , {isLoading:searchLoading , searchKey} , isLoading , ] = useSelector(state => [state.allUser.allUser.result , state.allUser.userSearch , state.allUser.isLoading  ])
 
@@ -22,22 +18,6 @@ const Messages = () => {
       dispatch(fetchAllUser())
     }
   } , [searchKey , dispatch])
-
-  
-  // useEffect(() => {
-  //   if (!selectedId && !isLoading && allUser && currentWindowWidth >= 411) {
-  //     navigate(`/chatResult/${allUser && allUser[0]._id}`);
-  //     setSelectedId(allUser[0]._id);
-  //   }
-  // }, [
-  //   allUser,
-  //   isAutoSelected,
-  //   isLoading,
-  //   setSelectedId,
-  //   selectedId,
-  //   navigate,
-  //   currentWindowWidth
-  // ]);
 
   return (
     <div className="h-screen pr-0">

@@ -3,9 +3,6 @@ import Messages from "./Messages";
 import Title from "../../Components/Title";
 import { Outlet } from "react-router-dom";
 import FriendProfile from "./FriendProfile";
-import { useState } from "react";
-import useSelectedFriend from "../../hooks/useSelectedFriend";
-import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
 

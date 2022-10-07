@@ -9,7 +9,6 @@ import "tw-elements";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequireAuth from "../Components/RequireAuth";
-import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthUser } from "../features/chat/authUserSlice";
 import WelcomeChat from "../Pages/Chat/WelcomeChat";
