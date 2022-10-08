@@ -11,7 +11,7 @@ const RequireAuth = ({ children }) => {
     return <Spinner />;
   }
 
-  if (!user.result) {
+  if (!user.result || !localStorage.getItem("accessToken")) {
     // Redirect them to the /login page, but save the current location they were
     // trying to go to when they were redirected. This allows us to send them
     // along to that page after they login, which is a nicer user experience

@@ -20,7 +20,9 @@ function App() {
   const dispatch = useDispatch()
 
   if (!user.result && !AuthUserLoading) {
-    dispatch(fetchAuthUser())
+    if (localStorage.getItem("accessToken")) {
+      dispatch(fetchAuthUser())
+    }
   }
 
   return (

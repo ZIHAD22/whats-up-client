@@ -18,7 +18,6 @@ const initialState = {
 }
 
 const fetchAllUser = createAsyncThunk("allUser/fetchAllUser", async (arg, { dispatch, getState }) => {
-    // const { payload: { user: { email: loginUser } } } = await dispatch(fetchAuthUser())
     const { authUser: { user: { user: { email: loginUser } } } } = getState()
     const { data: allUser } = await axios.get(`auth/allUser?email=${loginUser}`);
     return allUser

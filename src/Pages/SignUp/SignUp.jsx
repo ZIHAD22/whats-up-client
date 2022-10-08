@@ -20,6 +20,7 @@ const SignUp = () => {
     reset,
     formState: { errors },
   } = useForm();
+
   const handleSignUp = async (data) => {
     const {
       name,

@@ -32,12 +32,11 @@ const SignIn = () => {
       setAccessToken(userToken);
       dispatch(fetchAuthUser())
       reset();
-      navigate("/")
     }
   };
 
   if(user.result){
-    return navigate("/")
+    navigate("/")
   }
 
   return (
