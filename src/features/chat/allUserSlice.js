@@ -53,6 +53,8 @@ const allUserSlice = createSlice({
                 state.selectedUser.isLoading = false
             } else {
                 state.selectedUser.error = "You do not select any friend"
+                state.selectedUser.selectedUserInfo = {}
+                state.selectedUser.isLoading = false
             }
         }
     },

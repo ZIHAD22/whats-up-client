@@ -41,7 +41,7 @@ function App() {
             element={<ChattingArea />}
           />
           <Route
-            path="chatResult"
+            path="/"
             element={<WelcomeChat />}
           />
         </Route>
