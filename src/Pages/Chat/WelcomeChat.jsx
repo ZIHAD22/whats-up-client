@@ -5,9 +5,9 @@ const WelcomeChat = () => {
     const [user , loading] = useSelector(state => [state.authUser.user , state.authUser.authUserLoading])
     
     return (
-        <div className='text-center mt-8 text-2xl'>
-            <h1>Welcome</h1>
-            <h1>{user.user.name}</h1>
+        <div className='text-center mt-8'>
+            <h1 className='text-3xl'>Welcome</h1>
+            <h1 className='text-xl'>{user.user.name}</h1>
         </div>
     );
 };
