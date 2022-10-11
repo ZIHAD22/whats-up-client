@@ -23,7 +23,7 @@ const fetchAllUser = createAsyncThunk("allUser/fetchAllUser", async (arg, { disp
     return allUser
 })
 
-const searchUsersData = createAsyncThunk("allUser/searchUsers", async (arg, { getState, dispatch }) => {
+const searchUsersData = createAsyncThunk("allUser/searchUsers", async (arg, { getState }) => {
     const { authUser: { user: { user: { email: loginUser } } } } = getState()
     const { searchKey } = getState().allUser.userSearch
     const lowerSearchKey = searchKey.toLowerCase();

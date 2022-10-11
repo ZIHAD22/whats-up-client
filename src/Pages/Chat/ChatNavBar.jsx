@@ -9,7 +9,7 @@ const ChatNavBar = () => {
   let navigate = useNavigate();
   const dispatch = useDispatch()
 
-  const [selectedFriend]  = useSelector(state => [state.allUser.selectedUser.selectedUserInfo])
+  const [selectedFriend]  = useSelector(state => [state.conversation.selectedConversation.selectedConversationInfo])
 
   const handleNavigationMobile = () => {
     navigate("/");
