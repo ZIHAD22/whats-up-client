@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { getSelectedUserId, getSelectedUserInfo } from "../features/chat/allUserSlice";
-import { getSelectedConversationId, getSelectedConversationInfo } from "../features/chat/conversationUserSlice";
+import { getSelectedConversationUserId, getSelectedConversationUserInfo } from "../features/chat/conversationUserSlice";
 import Logo from "../img/logo.png";
 
 const Avatar = ({ width }) => {
@@ -12,8 +12,8 @@ const Avatar = ({ width }) => {
       <div onClick={() => {
         // dispatch(getSelectedUserId(""))
         // dispatch(getSelectedUserInfo())
-        dispatch(getSelectedConversationId(""))
-        dispatch(getSelectedConversationInfo())
+        dispatch(getSelectedConversationUserId(""))
+        dispatch(getSelectedConversationUserInfo())
       }} className={`${width || "w-24"} rounded`}>
         <Link to={`/`}>
           <img src={Logo} alt="logo" />

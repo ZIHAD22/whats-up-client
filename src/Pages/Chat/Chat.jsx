@@ -1,26 +1,25 @@
-import React from "react";
-import Messages from "./Messages";
-import Title from "../../Components/Title";
-import { Outlet } from "react-router-dom";
-import FriendProfile from "./FriendProfile";
-import { useSelector } from "react-redux";
-
-
-
+import React from 'react'
+import Messages from './Messages'
+import Title from '../../Components/Title'
+import { Outlet } from 'react-router-dom'
+import FriendProfile from './FriendProfile'
+import { useSelector } from 'react-redux'
 
 const Chat = ({ setSelectedId, selectedFriendId }) => {
-  const [selectedId] = useSelector(state => [state.allUser.selectedUser.selectedUserId])
+  const [selectedId] = useSelector((state) => [
+    state.conversation.selectedConversation.selectedConversationUserId,
+  ])
 
   return (
     <div>
       <Title title="messages" />
       <div className="grid md:grid-cols-4 grid-cols-1">
-        <div className={`${selectedId ? "hidden" : "block"} md:block`}>
+        <div className={`${selectedId ? 'hidden' : 'block'} md:block`}>
           {/* div for see all message */}
           <Messages />
         </div>
         <div
-          className={`col-span-2 ${!selectedId ? "hidden" : "block"} md:block`}
+          className={`col-span-2 ${!selectedId ? 'hidden' : 'block'} md:block`}
         >
           {/* div for selected message see  */}
           <Outlet />
@@ -31,7 +30,7 @@ const Chat = ({ setSelectedId, selectedFriendId }) => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Chat;
+export default Chat

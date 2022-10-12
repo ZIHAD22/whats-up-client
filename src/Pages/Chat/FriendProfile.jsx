@@ -4,7 +4,7 @@ import ActiveFriend from "./ActiveFriend";
 import ProfileOptions from "./ProfileOptions";
 
 const FriendProfile = () => {
-  const [selectedFriend , authUser]  = useSelector(state => [state.conversation.selectedConversation.selectedConversationInfo, state.authUser.user])
+  const [selectedFriend , authUser]  = useSelector(state => [state.conversation.selectedConversation.selectedConversationUserInfo, state.authUser.user])
   // console.log(selectedFriend);
   return (
     <div className="p-5 text-center shadow-md h-screen">

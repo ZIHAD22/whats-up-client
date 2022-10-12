@@ -9,8 +9,8 @@ const initialState = {
         error: null
     },
     selectedConversation: {
-        selectedConversationId: "",
-        selectedConversationInfo: {},
+        selectedConversationUserId: "",
+        selectedConversationUserInfo: {},
         isLoading: false,
         error: null
     }
@@ -27,22 +27,22 @@ const conversationSlice = createSlice({
     name: "conversation",
     initialState,
     reducers: {
-        getSelectedConversationId: (state, action) => {
-            state.selectedConversation.selectedConversationId = action.payload
+        getSelectedConversationUserId: (state, action) => {
+            state.selectedConversation.selectedConversationUserId = action.payload
         },
-        getSelectedConversationInfo: (state, action) => {
+        getSelectedConversationUserInfo: (state, action) => {
             state.selectedConversation.isLoading = true
-            const conversationId = state.selectedConversation.selectedConversationId
-            if (conversationId) {
-                const filteredUser = state.allConversation.friend.filter(user => user._id === conversationId)
-                state.selectedConversation.selectedConversationInfo = filteredUser[0]
+            const conversationUserId = state.selectedConversation.selectedConversationUserId
+            if (conversationUserId) {
+                const filteredUser = state.allConversation.friend.filter(user => user._id === conversationUserId)
+                state.selectedConversation.selectedConversationUserInfo = filteredUser[0]
                 state.selectedConversation.isLoading = false
             } else {
                 state.selectedConversation.error = "You do not select any friend"
-                state.selectedConversation.selectedConversationInfo = {}
+                state.selectedConversation.selectedConversationUserInfo = {}
                 state.selectedConversation.isLoading = false
             }
-        }
+        },
 
     },
     extraReducers: (builder) => {
@@ -64,12 +64,12 @@ const conversationSlice = createSlice({
     }
 })
 
-const { getSelectedConversationId, getSelectedConversationInfo } = conversationSlice.actions
+const { getSelectedConversationUserId, getSelectedConversationUserInfo } = conversationSlice.actions
 
 export {
     fetchUserConversation,
-    getSelectedConversationId,
-    getSelectedConversationInfo
+    getSelectedConversationUserId,
+    getSelectedConversationUserInfo,
 }
 
 export default conversationSlice.reducer

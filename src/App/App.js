@@ -39,7 +39,7 @@ function App() {
           }
         >
           <Route
-            path="chatResult/:conversationId"
+            path="chatResult/:conversationUserId"
             element={<ChattingArea />}
           />
           <Route

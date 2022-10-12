@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "../../util/axios"
+import findSelectedConversationId from "../../util/findSelectedConversationId"
 
 const initialState = {
     messages: [],
@@ -8,19 +9,11 @@ const initialState = {
 }
 
 const fetchSelectedConversationMeg = createAsyncThunk("messages/fetchSelectedConversationMeg", async (arg, { getState, rejectWithValue }) => {
-    const { conversation: { allConversation: { conversation }, selectedConversation: { selectedConversationId } } } = getState()
+    const { conversation: { allConversation: { conversation }, selectedConversation: { selectedConversationUserId } } } = getState()
 
-    let findSelectedConversationId
-    if (selectedConversationId && conversation.length !== 0) {
-        conversation.forEach((item, i) => {
-            return item.members.filter(mem => {
-                if (mem === selectedConversationId) {
-                    return findSelectedConversationId = item._id
-                }
-            })
-        })
-    }
-    const { data } = await axios.get(`messages/${findSelectedConversationId}`)
+    const conversationId = findSelectedConversationId(conversation, selectedConversationUserId)
+
+    const { data } = await axios.get(`messages/${conversationId}`)
 
     if (data.length === 0) {
         return rejectWithValue("No Conversation Found")
