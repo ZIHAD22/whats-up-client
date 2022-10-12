@@ -1,28 +1,42 @@
-import axios from "../../util/axios";
-import { ArrowCircleRightIcon } from "@heroicons/react/solid";
-import React from "react";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import axios from '../../util/axios'
+import { ArrowCircleRightIcon } from '@heroicons/react/solid'
+import React from 'react'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import findSelectedConversationId from '../../util/findSelectedConversationId'
+import { fetchSelectedConversationMeg } from '../../features/chat/messagesSlice'
 
 const ChatInput = () => {
-  const [user , selectedFriend] = useSelector(state => [state.authUser.user , state.allUser.selectedUser.selectedUserInfo])
+  const dispatch = useDispatch()
+  const [
+    authUser,
+    conversation,
+    selectedConversationUserId,
+  ] = useSelector((state) => [
+    state.authUser.user.user,
+    state.conversation.allConversation.conversation,
+    state.conversation.selectedConversation.selectedConversationUserId,
+  ])
 
-  const [sendingMessages, setSenddingMessages] = useState("");
+  const [sendingMessages, setSendingMessages] = useState('')
   const handleMessages = (e) => {
-    setSenddingMessages(e.target.value);
-  };
+    setSendingMessages(e.target.value)
+  }
 
   const handleSenddingMessages = async () => {
-    const { data } = await axios.put("/messages", {
-      user: [user.user._id, selectedFriend._id],
-      firstSender: user.user._id,
-      lastSender: user.user._id,
-      lastMessages: sendingMessages,
-      senddingTo: selectedFriend._id,
-    });
-    console.log(data);
-    setSenddingMessages("");
-  };
+    const conversationId = findSelectedConversationId(
+      conversation,
+      selectedConversationUserId,
+    )
+    const { data } = await axios.post('/messages', {
+      conversationId,
+      sender: authUser._id,
+      message: sendingMessages,
+    })
+    console.log(data)
+    setSendingMessages('')
+    dispatch(fetchSelectedConversationMeg())
+  }
 
   return (
     <div className="grid grid-cols-6 mt-5">
@@ -73,7 +87,7 @@ const ChatInput = () => {
         <ArrowCircleRightIcon className="h-12 w-16 text-primary" />
       </button>
     </div>
-  );
-};
+  )
+}
 
-export default ChatInput;
+export default ChatInput
