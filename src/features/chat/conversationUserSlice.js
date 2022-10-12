@@ -20,7 +20,6 @@ const initialState = {
 const fetchUserConversation = createAsyncThunk("conversation/fetchUserConversation", async (arg, { getState }) => {
     const { authUser: { user: { user: { _id: userId } } } } = getState()
     const { data } = await axios.get(`conversation/${userId}`)
-    console.log(data);
     return data
 })
 
