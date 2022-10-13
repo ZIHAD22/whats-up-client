@@ -6,10 +6,6 @@ import { useParams } from "react-router-dom";
 
 const ChattingArea = () => {
 
-  const param = useParams()
-
-  // console.log(param);
-
   return (
     <div className="block overflow-hidden">
       <ChatNavBar

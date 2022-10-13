@@ -1,29 +1,38 @@
 import axios from '../../util/axios'
 import { ArrowCircleRightIcon } from '@heroicons/react/solid'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import findSelectedConversationId from '../../util/findSelectedConversationId'
-import { fetchSelectedConversationMeg } from '../../features/chat/messagesSlice'
+import { fetchSelectedConversationMeg, messagesAgainLoad, updateMessages, updateSendingMessagesState } from '../../features/chat/messagesSlice'
+import { useRef } from 'react'
+import io from "socket.io-client"
 
 const ChatInput = () => {
   const dispatch = useDispatch()
+  const socket = useRef()
+  useEffect(() => {
+    socket.current = io('http://localhost:7000')
+  }, [])
+
   const [
     authUser,
     conversation,
     selectedConversationUserId,
+    sendingMessages
   ] = useSelector((state) => [
     state.authUser.user.user,
     state.conversation.allConversation.conversation,
     state.conversation.selectedConversation.selectedConversationUserId,
+    state.messages.sendingMessages.messages
   ])
 
-  const [sendingMessages, setSendingMessages] = useState('')
+  // const [sendingMessages, setSendingMessages] = useState('')
   const handleMessages = (e) => {
-    setSendingMessages(e.target.value)
+    dispatch(updateSendingMessagesState(e.target.value))
   }
 
-  const handleSenddingMessages = async () => {
+  const handleSendingMessages = async () => {
     const conversationId = findSelectedConversationId(
       conversation,
       selectedConversationUserId,
@@ -33,9 +42,21 @@ const ChatInput = () => {
       sender: authUser._id,
       message: sendingMessages,
     })
-    console.log(data)
-    setSendingMessages('')
-    dispatch(fetchSelectedConversationMeg())
+
+
+    socket.current.emit("sendMessage" , {
+      receiverId: selectedConversationUserId,
+      senderId:authUser._id,
+      text:sendingMessages
+    })
+
+    // setSendingMessages('')
+    dispatch(updateSendingMessagesState(""))
+    dispatch(messagesAgainLoad())
+    dispatch(updateMessages({
+      sender:authUser._id,
+      message:sendingMessages
+    }))
   }
 
   return (
@@ -82,7 +103,7 @@ const ChatInput = () => {
       </div>
       <button
         className="flex justify-center items-center"
-        onClick={handleSenddingMessages}
+        onClick={handleSendingMessages}
       >
         <ArrowCircleRightIcon className="h-12 w-16 text-primary" />
       </button>

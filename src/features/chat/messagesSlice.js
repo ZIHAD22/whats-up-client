@@ -5,7 +5,11 @@ import findSelectedConversationId from "../../util/findSelectedConversationId"
 const initialState = {
     messages: [],
     isLoading: false,
-    error: null
+    error: null,
+    sendingMessages: {
+        messages: "",
+    },
+    messagesLoadAgain: false
 }
 
 const fetchSelectedConversationMeg = createAsyncThunk("messages/fetchSelectedConversationMeg", async (arg, { getState, rejectWithValue }) => {
@@ -25,19 +29,29 @@ const fetchSelectedConversationMeg = createAsyncThunk("messages/fetchSelectedCon
 const messagesSlice = createSlice({
     name: "messages",
     initialState,
+    reducers: {
+        updateMessages: (state, action) => {
+            state.messages = [...state.messages, action.payload]
+        },
+        updateSendingMessagesState: (state, action) => {
+            state.sendingMessages.messages = action.payload
+        },
+        messagesAgainLoad: (state) => {
+            state.messagesLoadAgain = !state.messagesLoadAgain
+        }
+
+    },
     extraReducers: (builder) => {
         builder
             .addCase(fetchSelectedConversationMeg.pending, (state) => {
                 state.isLoading = true
             })
             .addCase(fetchSelectedConversationMeg.fulfilled, (state, action) => {
-                console.log(action.payload);
                 state.isLoading = false
                 state.messages = action.payload
                 state.error = null
             })
             .addCase(fetchSelectedConversationMeg.rejected, (state, action) => {
-                console.log(action);
                 state.isLoading = false
                 state.messages = []
                 state.error = action.payload
@@ -45,8 +59,13 @@ const messagesSlice = createSlice({
     }
 })
 
+const { updateMessages, updateSendingMessagesState, messagesAgainLoad } = messagesSlice.actions
+
 export {
-    fetchSelectedConversationMeg
+    fetchSelectedConversationMeg,
+    updateMessages,
+    updateSendingMessagesState,
+    messagesAgainLoad
 }
 
 export default messagesSlice.reducer
