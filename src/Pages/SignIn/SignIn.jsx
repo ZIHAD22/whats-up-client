@@ -24,6 +24,8 @@ const SignIn = () => {
   const handleSignIn = async (data) => {
     const { data: signInUser } = await axios.post("/signIn", data);
 
+    console.log(signInUser);
+
     if (!signInUser.success) {
       reset();
       toast.error(signInUser.result);

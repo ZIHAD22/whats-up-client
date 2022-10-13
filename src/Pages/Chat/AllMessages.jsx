@@ -1,4 +1,6 @@
 import React from 'react'
+import { useEffect } from 'react'
+import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 import Spinner from '../../Components/Spinner'
 import MessageItem from './MessageItem'
@@ -10,6 +12,12 @@ const AllMessages = () => {
     state.messages.error,
     state.authUser.user.user,
   ])
+
+  const scrollRef = useRef()
+
+  useEffect(() => {
+    scrollRef?.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
 
   if (isLoading) {
     return <Spinner />
@@ -24,6 +32,7 @@ const AllMessages = () => {
           <>
             {messages?.map((message) => (
               <div
+                ref={scrollRef}
                 key={message._id}
                 className={
                   message.sender === authUser._id ? 'text-right mt-3' : 'mt-3'

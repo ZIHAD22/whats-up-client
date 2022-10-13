@@ -12,6 +12,7 @@ import RequireAuth from "../Components/RequireAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAuthUser } from "../features/chat/authUserSlice";
 import WelcomeChat from "../Pages/Chat/WelcomeChat";
+import { useEffect } from "react";
 // TODO: in verson 2 work with profile view before login
 
 function App() {
@@ -19,11 +20,15 @@ function App() {
   // const [selectedId, setSelectedId] = useState("");
   const dispatch = useDispatch()
 
-  if (!user.result && !AuthUserLoading) {
-    if (localStorage.getItem("accessToken")) {
-      dispatch(fetchAuthUser())
-    }
-  }
+  // if (!user.result && !AuthUserLoading) {
+  //   if (localStorage.getItem("accessToken")) {
+  //     dispatch(fetchAuthUser())
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   dispatch(fetchAuthUser())
+  // }, [])
 
   return (
     <div className="max-w-[1300px] mx-auto">

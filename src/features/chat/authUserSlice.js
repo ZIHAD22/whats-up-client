@@ -3,7 +3,7 @@ import axios from "../../util/axios"
 
 const initialState = {
     user: {},
-    authUserLoading: false,
+    authUserLoading: true,
     error: null
 }
 
