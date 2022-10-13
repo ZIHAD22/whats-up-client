@@ -7,12 +7,14 @@ import findSelectedConversationId from '../../util/findSelectedConversationId'
 import { fetchSelectedConversationMeg, messagesAgainLoad, updateMessages, updateSendingMessagesState } from '../../features/chat/messagesSlice'
 import { useRef } from 'react'
 import io from "socket.io-client"
+import getSocketServerUrl from '../../util/socketServerUrl'
 
 const ChatInput = () => {
+  const socketServerUrl = getSocketServerUrl()
   const dispatch = useDispatch()
   const socket = useRef()
   useEffect(() => {
-    socket.current = io('http://localhost:7000')
+    socket.current = io(socketServerUrl)
   }, [])
 
   const [

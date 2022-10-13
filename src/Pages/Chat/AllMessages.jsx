@@ -6,14 +6,16 @@ import Spinner from '../../Components/Spinner'
 import MessageItem from './MessageItem'
 import io from 'socket.io-client'
 import { updateMessages } from '../../features/chat/messagesSlice'
+import getSocketServerUrl from '../../util/socketServerUrl'
 
 const AllMessages = () => {
-  const dispatch = useDispatch()
+  const socketServerUrl = getSocketServerUrl()
+  const dispatch = useDispatch(socketServerUrl)
   const socket = useRef()
   const scrollRef = useRef()
 
   useEffect(() => {
-    socket.current = io('http://localhost:7000')
+    socket.current = io()
   }, [])
 
   const [messages, isLoading, error, authUser , loadAgain] = useSelector((state) => [
