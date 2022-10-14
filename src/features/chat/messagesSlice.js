@@ -31,6 +31,7 @@ const messagesSlice = createSlice({
     initialState,
     reducers: {
         updateMessages: (state, action) => {
+            // console.log();
             state.messages = [...state.messages, action.payload]
         },
         updateSendingMessagesState: (state, action) => {

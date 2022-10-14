@@ -7,24 +7,40 @@ import MessageItem from './MessageItem'
 import io from 'socket.io-client'
 import { updateMessages } from '../../features/chat/messagesSlice'
 import getSocketServerUrl from '../../util/socketServerUrl'
+import { useState } from 'react'
+import findSelectedConversationMember from '../../util/findSelectedConversation'
+import findSelectedConversationId from '../../util/findSelectedConversationId'
 
 const AllMessages = () => {
   const socketServerUrl = getSocketServerUrl()
-  const dispatch = useDispatch(socketServerUrl)
+  const [conversationId , setConversationId] = useState(false) 
+  const [arrivalMessage , setArrivalMessage] = useState(null) 
+  const dispatch = useDispatch()
   const socket = useRef()
   const scrollRef = useRef()
 
   useEffect(() => {
-    socket.current = io()
+    socket.current = io(socketServerUrl)
   }, [])
 
-  const [messages, isLoading, error, authUser , loadAgain] = useSelector((state) => [
+  const [messages, isLoading, error, authUser , selectedConversationUserId , allConversation] = useSelector((state) => [
     state.messages.messages,
     state.messages.isLoading,
     state.messages.error,
     state.authUser.user.user,
-    state.messages.messagesLoadAgain
+    state.conversation.selectedConversation.selectedConversationUserId,
+    state.conversation.allConversation.conversation,
   ])
+
+
+
+
+  useEffect(() => {
+    const selectedConId = findSelectedConversationId(allConversation , selectedConversationUserId) 
+    if(selectedConId){
+      setConversationId(selectedConId)
+    }
+  } , [allConversation , selectedConversationUserId])
 
   useEffect(() => {
     socket.current.emit('addUser', authUser._id)
@@ -34,11 +50,20 @@ const AllMessages = () => {
   }, [authUser])
 
   useEffect(() => {
-      socket.current.on("getMessage" , (newMessages) => {
-        dispatch(updateMessages(newMessages))
+    socket.current.on("getMessage" , (newMessages) => {
+      setArrivalMessage(newMessages)
       })
-  } , [])
+  } , [messages])
 
+
+  useEffect(() => {
+     const updateMessageState = findSelectedConversationMember(allConversation , selectedConversationUserId , arrivalMessage?.sender , conversationId)
+
+    arrivalMessage && updateMessageState && dispatch(updateMessages(arrivalMessage))
+
+  } , [arrivalMessage , conversationId , conversationId , selectedConversationUserId])
+
+  
   useEffect(() => {
     scrollRef?.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])

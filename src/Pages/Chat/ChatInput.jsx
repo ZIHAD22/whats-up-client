@@ -54,11 +54,11 @@ const ChatInput = () => {
 
     // setSendingMessages('')
     dispatch(updateSendingMessagesState(""))
-    dispatch(messagesAgainLoad())
     dispatch(updateMessages({
       sender:authUser._id,
       message:sendingMessages
     }))
+    dispatch(messagesAgainLoad())
   }
 
   return (
