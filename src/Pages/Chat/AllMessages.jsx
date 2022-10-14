@@ -6,13 +6,13 @@ import Spinner from '../../Components/Spinner'
 import MessageItem from './MessageItem'
 import io from 'socket.io-client'
 import { updateMessages } from '../../features/chat/messagesSlice'
-import getSocketServerUrl from '../../util/socketServerUrl'
+// import getSocketServerUrl from '../../util/socketServerUrl'
 import { useState } from 'react'
 import findSelectedConversationMember from '../../util/findSelectedConversation'
 import findSelectedConversationId from '../../util/findSelectedConversationId'
 
 const AllMessages = () => {
-  const socketServerUrl = getSocketServerUrl()
+  // const socketServerUrl = getSocketServerUrl()
   const [conversationId , setConversationId] = useState(false) 
   const [arrivalMessage , setArrivalMessage] = useState(null) 
   const dispatch = useDispatch()
@@ -20,7 +20,7 @@ const AllMessages = () => {
   const scrollRef = useRef()
 
   useEffect(() => {
-    socket.current = io(socketServerUrl)
+    socket.current = io("https://whispering-river-96621.herokuapp.com")
   }, [])
 
   const [messages, isLoading, error, authUser , selectedConversationUserId , allConversation] = useSelector((state) => [
