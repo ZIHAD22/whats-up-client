@@ -10,8 +10,11 @@ import getSocketServerUrl from '../../util/socketServerUrl'
 import { useState } from 'react'
 import findSelectedConversationMember from '../../util/findSelectedConversation'
 import findSelectedConversationId from '../../util/findSelectedConversationId'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
+import { getSelectedConversationUserId } from '../../features/chat/conversationUserSlice'
 
 const AllMessages = () => {
+  const { width } = useWindowDimensions()
   const socketServerUrl = getSocketServerUrl()
   const [conversationId, setConversationId] = useState(false)
   const [arrivalMessage, setArrivalMessage] = useState(null)
@@ -23,18 +26,25 @@ const AllMessages = () => {
     socket.current = io(socketServerUrl)
   }, [])
 
-  const [messages, isLoading, error, authUser, selectedConversationUserId, allConversation] = useSelector((state) => [
+  const [messages, isLoading, error, authUser, selectedConversationUserId, allConversation, selectedId] = useSelector((state) => [
     state.messages.messages,
     state.messages.isLoading,
     state.messages.error,
     state.authUser.user.user,
     state.conversation.selectedConversation.selectedConversationUserId,
     state.conversation.allConversation.conversation,
+    state.conversation.selectedConversation.selectedConversationUserId
   ])
 
+  // for avoid welcome page in mobile case when any one chick back button in mobile then welcome page show unexpectedly this is why i avoid welcome page is mobile
+  window.addEventListener('popstate', function (event) {
+    if (width < 768 && selectedId) {
+      dispatch(getSelectedConversationUserId(""))
+    }
+  });
 
 
-
+  // this is all for socket server data receive and send 
   useEffect(() => {
     const selectedConId = findSelectedConversationId(allConversation, selectedConversationUserId)
     if (selectedConId) {

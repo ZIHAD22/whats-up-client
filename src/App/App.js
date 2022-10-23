@@ -9,7 +9,6 @@ import "tw-elements";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequireAuth from "../Components/RequireAuth";
-import WelcomeChat from "../Pages/Chat/WelcomeChat";
 // TODO: in verson 2 work with profile view before login
 
 function App() {
@@ -30,10 +29,6 @@ function App() {
           <Route
             path="chatResult/:conversationUserId"
             element={<ChattingArea />}
-          />
-          <Route
-            path="/"
-            element={<WelcomeChat />}
           />
         </Route>
         <Route path="*" element={<NotFound />} />

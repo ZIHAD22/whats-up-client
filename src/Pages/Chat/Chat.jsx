@@ -3,7 +3,8 @@ import Messages from './Messages'
 import Title from '../../Components/Title'
 import { Outlet } from 'react-router-dom'
 import FriendProfile from './FriendProfile'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import WelcomeChat from './WelcomeChat'
 
 const Chat = ({ setSelectedId, selectedFriendId }) => {
   const [selectedId] = useSelector((state) => [
@@ -22,7 +23,7 @@ const Chat = ({ setSelectedId, selectedFriendId }) => {
           className={`col-span-2 ${!selectedId ? 'hidden' : 'block'} md:block`}
         >
           {/* div for selected message see  */}
-          <Outlet />
+          {selectedId ? <Outlet /> : <WelcomeChat />}
         </div>
         <div className="md:block hidden">
           {/* div for profile */}

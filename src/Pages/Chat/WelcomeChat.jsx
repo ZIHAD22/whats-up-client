@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import Spinner from '../../Components/Spinner';
 
 const WelcomeChat = () => {
-    const [user , loading] = useSelector(state => [state.authUser.user , state.authUser.authUserLoading])
-    
-    if(loading) {
-        return <Spinner/>
+    const [user, loading] = useSelector(state => [state.authUser.user, state.authUser.authUserLoading])
+
+    if (loading) {
+        return <Spinner />
     }
 
     return (
