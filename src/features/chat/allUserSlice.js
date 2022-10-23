@@ -13,11 +13,16 @@ const initialState = {
         isLoading: false,
         error: null
     },
+    addFriendUsers: {
+        users: [],
+        isLoading: false,
+        error: null
+    },
     isLoading: false,
     error: null
 }
 
-const fetchAllUser = createAsyncThunk("allUser/fetchAllUser", async (arg, { dispatch, getState }) => {
+const fetchAllUser = createAsyncThunk("allUser/fetchAllUser", async (arg, { getState }) => {
     const { authUser: { user: { user: { email: loginUser } } } } = getState()
     const { data: allUser } = await axios.get(`auth/allUser?email=${loginUser}`);
     return allUser
@@ -31,6 +36,14 @@ const searchUsersData = createAsyncThunk("allUser/searchUsers", async (arg, { ge
         `auth/allUser?email=${loginUser}&searchKey=${lowerSearchKey}`
     );
     return searchUsers
+})
+
+const fetchAddFriendUsers = createAsyncThunk("allUser/fetchAddFriendUsers", async (authUserId, { getState }) => {
+    const { conversation: { allConversation: { conversation } } } = getState()
+    const allFriendId = conversation.map(con => con.members.find(mem => mem !== authUserId))
+
+    const { data: filteredUsers } = await axios.post("auth/getUserToConversationStart", { usersId: [...allFriendId, authUserId] })
+    return filteredUsers
 })
 
 const allUserSlice = createSlice({
@@ -55,6 +68,9 @@ const allUserSlice = createSlice({
                 state.selectedUser.selectedUserInfo = {}
                 state.selectedUser.isLoading = false
             }
+        },
+        getRemovedAfterAddUsersToConversation: (state, action) => {
+            state.addFriendUsers.users = action.payload
         }
     },
     extraReducers: (builder) => {
@@ -84,10 +100,23 @@ const allUserSlice = createSlice({
                 state.userSearch.isLoading = false
                 state.error = action.payload
             })
+            .addCase(fetchAddFriendUsers.pending, (state, action) => {
+                state.addFriendUsers.isLoading = true
+            })
+            .addCase(fetchAddFriendUsers.fulfilled, (state, action) => {
+                state.addFriendUsers.users = action.payload
+                state.addFriendUsers.isLoading = false
+                state.addFriendUsers.error = null
+            })
+            .addCase(fetchAddFriendUsers.rejected, (state, action) => {
+                state.addFriendUsers.users = []
+                state.addFriendUsers.isLoading = false
+                state.addFriendUsers.error = action.payload
+            })
     }
 })
 
-const { getSearchKey, getSelectedUserId, getSelectedUserInfo } = allUserSlice.actions
+const { getSearchKey, getSelectedUserId, getSelectedUserInfo, getRemovedAfterAddUsersToConversation } = allUserSlice.actions
 
 export {
     fetchAllUser,
@@ -95,6 +124,8 @@ export {
     searchUsersData,
     getSelectedUserId,
     getSelectedUserInfo,
+    getRemovedAfterAddUsersToConversation,
+    fetchAddFriendUsers
 }
 
 export default allUserSlice.reducer

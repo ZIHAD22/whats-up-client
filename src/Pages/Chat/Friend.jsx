@@ -2,7 +2,6 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
-import Spinner from '../../Components/Spinner'
 import {
   getSelectedConversationUserId,
   getSelectedConversationUserInfo,
@@ -27,8 +26,6 @@ const Friend = ({ user: { name, profilePic, _id } }) => {
     <Link
       to={`chatResult/${_id}`}
       onClick={() => {
-        // dispatch(getSelectedUserId(_id))
-        // dispatch(getSelectedUserInfo())
         dispatch(getSelectedConversationUserId(_id))
         dispatch(getSelectedConversationUserInfo())
         dispatch(fetchSelectedConversationMeg())

@@ -1,8 +1,8 @@
 import React from "react";
 
-const Spinner = (widthOrHeight) => {
+const Spinner = ({ spinnerAlign }) => {
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className={`${spinnerAlign ? spinnerAlign : "h-screen"}  flex justify-center items-center`}>
       <svg
         role="status"
         className="h-20 w-20 animate-spin mr-2 text-primary fill-white "

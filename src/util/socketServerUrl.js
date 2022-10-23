@@ -7,8 +7,6 @@ const getSocketServerUrl = () => {
         url = process.env.REACT_APP_SOCKET_SERVER_ONLINE_URL
     }
 
-    console.log(url);
-
     return url
 }
 

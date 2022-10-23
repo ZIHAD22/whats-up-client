@@ -13,17 +13,17 @@ import findSelectedConversationId from '../../util/findSelectedConversationId'
 
 const AllMessages = () => {
   const socketServerUrl = getSocketServerUrl()
-  const [conversationId , setConversationId] = useState(false) 
-  const [arrivalMessage , setArrivalMessage] = useState(null) 
+  const [conversationId, setConversationId] = useState(false)
+  const [arrivalMessage, setArrivalMessage] = useState(null)
   const dispatch = useDispatch()
   const socket = useRef()
   const scrollRef = useRef()
 
   useEffect(() => {
-    socket.current = io(getSocketServerUrl)
+    socket.current = io(socketServerUrl)
   }, [])
 
-  const [messages, isLoading, error, authUser , selectedConversationUserId , allConversation] = useSelector((state) => [
+  const [messages, isLoading, error, authUser, selectedConversationUserId, allConversation] = useSelector((state) => [
     state.messages.messages,
     state.messages.isLoading,
     state.messages.error,
@@ -36,11 +36,11 @@ const AllMessages = () => {
 
 
   useEffect(() => {
-    const selectedConId = findSelectedConversationId(allConversation , selectedConversationUserId) 
-    if(selectedConId){
+    const selectedConId = findSelectedConversationId(allConversation, selectedConversationUserId)
+    if (selectedConId) {
       setConversationId(selectedConId)
     }
-  } , [allConversation , selectedConversationUserId])
+  }, [allConversation, selectedConversationUserId])
 
   useEffect(() => {
     socket.current.emit('addUser', authUser._id)
@@ -50,20 +50,20 @@ const AllMessages = () => {
   }, [authUser])
 
   useEffect(() => {
-    socket.current.on("getMessage" , (newMessages) => {
+    socket.current.on("getMessage", (newMessages) => {
       setArrivalMessage(newMessages)
-      })
-  } , [messages])
+    })
+  }, [])
 
 
   useEffect(() => {
-     const updateMessageState = findSelectedConversationMember(allConversation , selectedConversationUserId , arrivalMessage?.sender , conversationId)
+    const updateMessageState = findSelectedConversationMember(allConversation, selectedConversationUserId, arrivalMessage?.sender, conversationId)
 
     arrivalMessage && updateMessageState && dispatch(updateMessages(arrivalMessage))
 
-  } , [arrivalMessage , conversationId , conversationId , selectedConversationUserId])
+  }, [arrivalMessage, dispatch])
 
-  
+
   useEffect(() => {
     scrollRef?.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
@@ -75,8 +75,8 @@ const AllMessages = () => {
           <Spinner />
         ) : (
           <>
-            {error ? (
-              error
+            {messages.length === 0 ? (
+              <h1 className="text-center font-bold">{error}</h1>
             ) : (
               <>
                 {messages?.map((message) => (

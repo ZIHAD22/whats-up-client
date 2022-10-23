@@ -2,7 +2,6 @@ import { ArrowCircleLeftIcon } from '@heroicons/react/solid'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { getSelectedUserId } from '../../features/chat/allUserSlice'
 import { getSelectedConversationUserId } from '../../features/chat/conversationUserSlice'
 import ActiveFriend from './ActiveFriend'
 

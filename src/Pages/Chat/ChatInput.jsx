@@ -1,10 +1,9 @@
 import axios from '../../util/axios'
 import { ArrowCircleRightIcon } from '@heroicons/react/solid'
 import React, { useEffect } from 'react'
-import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import findSelectedConversationId from '../../util/findSelectedConversationId'
-import { fetchSelectedConversationMeg, messagesAgainLoad, updateMessages, updateSendingMessagesState } from '../../features/chat/messagesSlice'
+import { messagesAgainLoad, updateMessages, updateSendingMessagesState } from '../../features/chat/messagesSlice'
 import { useRef } from 'react'
 import io from "socket.io-client"
 import getSocketServerUrl from '../../util/socketServerUrl'
@@ -14,7 +13,7 @@ const ChatInput = () => {
   const dispatch = useDispatch()
   const socket = useRef()
   useEffect(() => {
-    socket.current = io()
+    socket.current = io(socketServerUrl)
   }, [])
 
   const [
@@ -46,17 +45,17 @@ const ChatInput = () => {
     })
 
 
-    socket.current.emit("sendMessage" , {
+    socket.current.emit("sendMessage", {
       receiverId: selectedConversationUserId,
-      senderId:authUser._id,
-      text:sendingMessages
+      senderId: authUser._id,
+      text: sendingMessages
     })
 
     // setSendingMessages('')
     dispatch(updateSendingMessagesState(""))
     dispatch(updateMessages({
-      sender:authUser._id,
-      message:sendingMessages
+      sender: authUser._id,
+      message: sendingMessages
     }))
     dispatch(messagesAgainLoad())
   }
