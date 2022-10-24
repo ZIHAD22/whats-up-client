@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import axios from "../../util/axios";
+import filterAllConversationFriendId from "../../util/filterAllConversationFriendId";
 const initialState = {
     allUser: [],
     userSearch: {
@@ -40,10 +41,20 @@ const searchUsersData = createAsyncThunk("allUser/searchUsers", async (arg, { ge
 
 const fetchAddFriendUsers = createAsyncThunk("allUser/fetchAddFriendUsers", async (authUserId, { getState }) => {
     const { conversation: { allConversation: { conversation } } } = getState()
-    const allFriendId = conversation.map(con => con.members.find(mem => mem !== authUserId))
+    const allFriendId = filterAllConversationFriendId(authUserId, conversation)
 
     const { data: filteredUsers } = await axios.post("auth/getUserToConversationStart", { usersId: [...allFriendId, authUserId] })
     return filteredUsers
+})
+
+
+const searchForAddUsersToConversation = createAsyncThunk("allUser/searchForAddUsersToConversation", async (authUserId, { getState }) => {
+    const { conversation: { allConversation: { conversation } }, allUser: { userSearch: { searchKey } } } = getState()
+    const allFriendId = filterAllConversationFriendId(authUserId, conversation)
+
+    const { data: searchUsersForConversation } = await axios.post("auth/getUserToConversationStart", { usersId: [...allFriendId, authUserId], searchKey })
+
+    return searchUsersForConversation
 })
 
 const allUserSlice = createSlice({
@@ -113,6 +124,19 @@ const allUserSlice = createSlice({
                 state.addFriendUsers.isLoading = false
                 state.addFriendUsers.error = action.payload
             })
+            .addCase(searchForAddUsersToConversation.pending, (state) => {
+                state.addFriendUsers.isLoading = true
+            })
+            .addCase(searchForAddUsersToConversation.fulfilled, (state, action) => {
+                state.addFriendUsers.users = action.payload
+                state.addFriendUsers.isLoading = false
+                state.addFriendUsers.error = null
+            })
+            .addCase(searchForAddUsersToConversation.rejected, (state, action) => {
+                state.addFriendUsers.users = []
+                state.addFriendUsers.isLoading = false
+                state.addFriendUsers.error = action.payload
+            })
     }
 })
 
@@ -125,7 +149,8 @@ export {
     getSelectedUserId,
     getSelectedUserInfo,
     getRemovedAfterAddUsersToConversation,
-    fetchAddFriendUsers
+    fetchAddFriendUsers,
+    searchForAddUsersToConversation
 }
 
 export default allUserSlice.reducer
