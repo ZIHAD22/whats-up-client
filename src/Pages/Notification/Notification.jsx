@@ -1,7 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { handleNotificationModal } from '../../features/notification/notificationSlice';
-import "./Notification.css"
 import NotificationCard from './NotificationCard';
 
 const Notification = () => {
