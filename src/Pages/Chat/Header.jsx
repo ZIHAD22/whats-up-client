@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from "../../Components/Avatar";
 import { fetchAddFriendUsers, fetchAllUser, getSearchKey, searchUsersData } from "../../features/chat/allUserSlice";
+import { handleNotificationModal } from "../../features/notification/notificationSlice";
+import Notification from "../Notification/Notification";
 import SettingsModal from "../Settings/SettingsModal";
 import SearchModal from "./SearchModal";
 const flexCss = "flex justify-center items-center";
@@ -21,12 +23,18 @@ const Header = () => {
 
   }
 
+  const handleToggleNotification = () => {
+    dispatch(handleNotificationModal(true))
+  }
+
   return (
-    <div className="">
+    <div className="relative">
       <div className={`flex items-center justify-center`}>
         <div className="indicator">
           <span className="indicator-item badge badge-primary">99+</span>
-          <Avatar width="w-[50px]" />
+          <div onClick={handleToggleNotification} className="cursor-pointer">
+            <Avatar width="w-[50px]" />
+          </div>
         </div>
         <span className="text-2xl px-8 text-center">
           <span>Whats-Up</span> <span className="text-sm block">Verson: 1.00</span>

@@ -30,7 +30,7 @@ const SearchModal = () => {
                                 className="input input-bordered input-primary w-full max-w-xs"
                             />
                         </div>
-                        <div className='overflow-scroll h-[400px] overflow-x-hidden mt-10 pb-16 md:pb-10'>
+                        <div className='overflow-scroll h-[400px] overflow-x-hidden mt-10 pb-16 md:pb-10 no-scrollbarChrome no-scrollbarFirefox'>
                             {allUnFrnIsLoading ? <Spinner spinnerAlign="mx-auto" /> :
                                 <>
                                     {allUnFriendUsers?.length === 0 && !allUnFrnIsLoading && <h1>No User Found</h1>}
