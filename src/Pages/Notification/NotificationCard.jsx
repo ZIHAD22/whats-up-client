@@ -3,18 +3,18 @@ import ActiveFriend from '../Chat/ActiveFriend';
 import curvedArrow from "../../img/curved-arrow-left.svg"
 
 
-const NotificationCard = ({ activePic }) => {
+const NotificationCard = ({ data: { message, senderName, senderPic } }) => {
     return (
         <div className='m-2'>
             <div className='flex'>
                 <div className=''>
-                    <ActiveFriend activePic={activePic} />
+                    <ActiveFriend activePic={senderPic} />
                 </div>
                 <div className='mt-2 ml-3'>
-                    <p>MD ZIHAD message you</p>
+                    <p>{senderName} message you</p>
                     <div className='flex'>
                         <img className="w-[10px] mr-2" src={curvedArrow} alt="arrow" />
-                        <small>Hi Rohomot </small>
+                        <small>{message}</small>
                     </div>
                 </div>
             </div>

@@ -1,15 +1,19 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { handleNotificationModal } from '../../features/notification/notificationSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleNotificationModal, sendMessageNotification } from '../../features/notification/notificationSlice';
 import NotificationCard from './NotificationCard';
 
 const Notification = () => {
     const dispatch = useDispatch()
-    const user = {
-        name: "MD ZIHAD",
-        profilePic: "https://i.ibb.co/HVnmBnY/dummy-profile-pic-300x300.png",
-        _id: "01"
-    }
+    // const user = {
+    //     name: "MD ZIHAD",
+    //     profilePic: "https://i.ibb.co/HVnmBnY/dummy-profile-pic-300x300.png",
+    //     _id: "01"
+    // }
+
+    const [notifications] = useSelector(state => [state.notification.notifications])
+    console.log(notifications);
+
     return (
         <div className='overflow-y-auto no-scrollbarChrome no-scrollbarFirefox mt-14 absolute bg-white md:h-[510px] md:w-[325px] h-screen w-screen z-10 shadow-2xl shadow-black rounded-lg' >
             <div className=''>
@@ -20,26 +24,10 @@ const Notification = () => {
             <div>
                 <h1 className='text-center text-3xl mt-5 text-primary'>Notification</h1>
             </div>
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
-            <NotificationCard activePic={user.profilePic} />
+            {
+                notifications.map(notifi => <NotificationCard data={notifi} />)
+            }
+            {/* <NotificationCard activePic={user.profilePic} /> */}
         </div>
     );
 };

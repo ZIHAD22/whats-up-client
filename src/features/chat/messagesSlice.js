@@ -9,7 +9,8 @@ const initialState = {
     sendingMessages: {
         messages: "",
     },
-    messagesLoadAgain: false
+    messagesLoadAgain: false,
+    newMessage: ""
 }
 
 const fetchSelectedConversationMeg = createAsyncThunk("messages/fetchSelectedConversationMeg", async (arg, { getState, rejectWithValue }) => {
@@ -39,6 +40,9 @@ const messagesSlice = createSlice({
         },
         messagesAgainLoad: (state) => {
             state.messagesLoadAgain = !state.messagesLoadAgain
+        },
+        updateNewMessage: (state, action) => {
+            state.newMessage = action.payload
         }
 
     },
@@ -60,11 +64,12 @@ const messagesSlice = createSlice({
     }
 })
 
-const { updateMessages, updateSendingMessagesState, messagesAgainLoad } = messagesSlice.actions
+const { updateMessages, updateSendingMessagesState, messagesAgainLoad, updateNewMessage } = messagesSlice.actions
 
 export {
     fetchSelectedConversationMeg,
     updateMessages,
+    updateNewMessage,
     updateSendingMessagesState,
     messagesAgainLoad
 }

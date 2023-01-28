@@ -48,6 +48,8 @@ const ChatInput = () => {
     socket.current.emit("sendMessage", {
       receiverId: selectedConversationUserId,
       senderId: authUser._id,
+      senderName: authUser.name,
+      senderPic: authUser?.profilePic,
       text: sendingMessages
     })
 

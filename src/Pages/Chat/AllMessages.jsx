@@ -5,13 +5,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import Spinner from '../../Components/Spinner'
 import MessageItem from './MessageItem'
 import io from 'socket.io-client'
-import { updateMessages } from '../../features/chat/messagesSlice'
+import { updateMessages, updateNewMessage } from '../../features/chat/messagesSlice'
 import getSocketServerUrl from '../../util/socketServerUrl'
 import { useState } from 'react'
 import findSelectedConversationMember from '../../util/findSelectedConversation'
 import findSelectedConversationId from '../../util/findSelectedConversationId'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
 import { getSelectedConversationUserId } from '../../features/chat/conversationUserSlice'
+import { sendMessageNotification } from '../../features/notification/notificationSlice'
+import { toast } from 'react-toastify'
 
 const AllMessages = () => {
   const { width } = useWindowDimensions()
@@ -65,11 +67,24 @@ const AllMessages = () => {
     })
   }, [])
 
-
   useEffect(() => {
     const updateMessageState = findSelectedConversationMember(allConversation, selectedConversationUserId, arrivalMessage?.sender, conversationId)
 
-    arrivalMessage && updateMessageState && dispatch(updateMessages(arrivalMessage))
+
+    if (arrivalMessage && updateMessageState) {
+      const { sender, message } = arrivalMessage
+      dispatch(updateMessages({ sender, message }))
+    } else if (arrivalMessage?.message && !updateMessageState) {
+      // console.log(arrivalMessage);
+      dispatch(sendMessageNotification(arrivalMessage))
+      toast.warning(`${arrivalMessage.senderName} just now message you`)
+
+    } else if (selectedId && arrivalMessage?.message) {
+      dispatch(sendMessageNotification(arrivalMessage))
+      toast.warning(`${arrivalMessage?.senderName} just now message you`)
+    }
+
+    // console.log(selectedId);
 
   }, [arrivalMessage, dispatch])
 

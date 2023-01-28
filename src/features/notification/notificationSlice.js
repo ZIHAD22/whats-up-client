@@ -12,15 +12,19 @@ const notificationSlice = createSlice({
     reducers: {
         handleNotificationModal: (state, action) => {
             state.isOpen = action.payload
+        },
+        sendMessageNotification: (state, action) => {
+            state.notifications = [...state.notifications, action.payload]
         }
     }
 })
 
-const { handleNotificationModal } = notificationSlice.actions
+const { handleNotificationModal, sendMessageNotification } = notificationSlice.actions
 
 
 export {
-    handleNotificationModal
+    handleNotificationModal,
+    sendMessageNotification
 }
 
 

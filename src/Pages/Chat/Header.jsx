@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Avatar from "../../Components/Avatar";
 import { fetchAddFriendUsers, fetchAllUser, getSearchKey, searchUsersData } from "../../features/chat/allUserSlice";
 import { handleNotificationModal } from "../../features/notification/notificationSlice";
-import Notification from "../Notification/Notification";
 import SettingsModal from "../Settings/SettingsModal";
 import SearchModal from "./SearchModal";
 const flexCss = "flex justify-center items-center";
